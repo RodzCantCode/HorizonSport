@@ -25,7 +25,19 @@ Todos los tokens están en `src/styles/global.css`.
 `src/data/contenido.js` es la fuente única: episodios, hosts, invitados y navegación. Cambiar ahí
 se propaga a todas las páginas.
 
+## Despliegue
+
+Vercel está enlazado al repo. **`main` → producción, cualquier otra rama → preview.**
+No hace falta subir archivos a mano: basta con `git push`.
+
+El dominio de producción es `horizonsport.co` y está declarado en `astro.config.mjs`
+(`site`), de donde salen las URLs canónicas y las etiquetas Open Graph.
+
 ## Pendiente antes de publicar
+
+- [ ] **Imagen Open Graph.** No hay `og:image`, así que al compartir el enlace por
+      WhatsApp o LinkedIn sale sin miniatura. Hace falta un PNG de 1200×630 en
+      `public/` y una etiqueta más en `Base.astro`.
 
 - [x] ~~Fotos de los hosts.~~ Hechas: los originales (PNG de ~20 MB) se redujeron a WebP de ~50 KB
       en dos tamaños (`-900` y `-450`, servidos con `srcset`). Para añadir o cambiar una, deja el

@@ -6,6 +6,10 @@ import { marca } from '../data/contenido.js';
 
 const { titulo, descripcion = marca.descripcion, activo = '' } = Astro.props;
 const tituloCompleto = titulo ? `${titulo} · ${marca.nombre}` : `${marca.nombre} — ${marca.claim}`;
+
+// Canónica siempre contra el dominio de producción, también desde los preview:
+// así los buscadores no indexan las URLs temporales de Vercel.
+const canonica = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
@@ -17,8 +21,11 @@ const tituloCompleto = titulo ? `${titulo} · ${marca.nombre}` : `${marca.nombre
     <meta name="description" content={descripcion} />
     <meta name="theme-color" content="#07090C" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonica} />
 
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:site_name" content={marca.nombre} />
     <meta property="og:title" content={tituloCompleto} />
     <meta property="og:description" content={descripcion} />
     <meta property="og:locale" content="es_ES" />
