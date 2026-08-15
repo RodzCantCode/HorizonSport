@@ -1,0 +1,166 @@
+---
+import Base from '../layouts/Base.astro';
+import EncabezadoPagina from '../components/EncabezadoPagina.astro';
+---
+
+<Base
+  titulo="Colabora"
+  activo="/colabora"
+  descripcion="Participa en Horizon Sport como invitado o patrocina el podcast. Descarga el media kit con audiencia, formatos y contacto."
+>
+  <EncabezadoPagina
+    titulo="Forma parte del programa"
+    entradilla="Dos formas de sumarte. Elige la tuya y te respondemos en pocos días."
+  />
+
+  <section class="media-kit" id="media-kit">
+    <div class="envoltorio media-kit__interior">
+      <div>
+        <h2 class="titular-seccion ancha">Media kit</h2>
+        <p class="parrafo media-kit__texto">
+          Perfil de audiencia, formatos de colaboración y tarifas. Un PDF, sin registro.
+        </p>
+      </div>
+      <a href="#" class="boton boton--solido">Descargar</a>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="envoltorio">
+      <div class="rejilla rejilla--2">
+        <article class="tarjeta tarjeta--decision" id="invitado">
+          <span class="estrecha">Profesionales</span>
+          <h2 class="titular-seccion ancha via__titulo">Ser invitado</h2>
+          <p class="parrafo via__texto">
+            Buscamos a quien toma decisiones y puede explicarlas: gestión de clubes, patrocinio,
+            derechos, representación, datos o marketing deportivo.
+          </p>
+
+          <ul class="via__lista">
+            <li>Audiencia profesional del sector</li>
+            <li>Difusión en podcast, newsletter y redes</li>
+            <li>Grabación y edición a nuestro cargo</li>
+          </ul>
+
+          <form class="via__form" method="post" action="#">
+            <label class="campo-form">
+              <span>Nombre</span>
+              <input type="text" name="nombre" required autocomplete="name" />
+            </label>
+            <label class="campo-form">
+              <span>Empresa y cargo</span>
+              <input type="text" name="empresa" required autocomplete="organization" />
+            </label>
+            <label class="campo-form">
+              <span>Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+            <label class="campo-form">
+              <span>De qué te gustaría hablar</span>
+              <textarea name="tema" required></textarea>
+            </label>
+            <button type="submit" class="boton boton--solido boton--bloque">
+              Enviar candidatura
+            </button>
+          </form>
+        </article>
+
+        <article class="tarjeta tarjeta--decision" id="patrocinio">
+          <span class="estrecha">Marcas</span>
+          <h2 class="titular-seccion ancha via__titulo">Patrocinar</h2>
+          <p class="parrafo via__texto">
+            Si tu cliente trabaja en la industria del deporte, aquí te escucha sin ruido. Diseñamos
+            la integración con vosotros en lugar de vender un hueco.
+          </p>
+
+          <ul class="via__lista">
+            <li>Menciones integradas y contenido de marca</li>
+            <li>Presencia en newsletter y notas del episodio</li>
+            <li>Formatos a medida, incluidos episodios temáticos</li>
+          </ul>
+
+          <form class="via__form" method="post" action="#">
+            <label class="campo-form">
+              <span>Nombre</span>
+              <input type="text" name="nombre" required autocomplete="name" />
+            </label>
+            <label class="campo-form">
+              <span>Marca o empresa</span>
+              <input type="text" name="marca" required autocomplete="organization" />
+            </label>
+            <label class="campo-form">
+              <span>Email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+            <label class="campo-form">
+              <span>Qué buscáis conseguir</span>
+              <textarea name="objetivo" required></textarea>
+            </label>
+            <button type="submit" class="boton boton--solido boton--bloque">
+              Solicitar propuesta
+            </button>
+          </form>
+        </article>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .media-kit {
+    background: var(--tinta-800);
+    border-bottom: 1px solid var(--linea);
+    padding-block: clamp(2.25rem, 5vw, 3.25rem);
+  }
+
+  .media-kit__interior {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 3rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .media-kit__texto {
+    margin-top: 0.65rem;
+    font-size: 0.9375rem;
+    max-width: 44ch;
+  }
+
+  .via__titulo {
+    margin-block: 0.65rem 0.85rem;
+  }
+
+  .via__texto {
+    font-size: 0.9375rem;
+  }
+
+  .via__lista {
+    margin: 1.1rem 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--papel-medio);
+  }
+
+  .via__lista li {
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .via__lista li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 4px;
+    height: 4px;
+    background: var(--azul);
+  }
+
+  .via__form {
+    border-top: 1px solid var(--linea);
+    padding-top: 1.4rem;
+  }
+</style>

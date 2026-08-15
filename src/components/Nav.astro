@@ -1,0 +1,136 @@
+---
+import { navegacion } from '../data/contenido.js';
+const { activo = '' } = Astro.props;
+---
+
+<header class="cabecera">
+  <div class="envoltorio cabecera__interior">
+    <a href="/" class="logo" aria-label="Horizon Sport, inicio">
+      <span>Horizon</span><span class="logo__punto">.</span><span>Sport</span>
+    </a>
+
+    <nav class="menu menu--escritorio" aria-label="Principal">
+      {
+        navegacion.map((item) => (
+          <a
+            href={item.href}
+            class:list={['menu__enlace', { 'menu__enlace--activo': activo === item.href }]}
+            aria-current={activo === item.href ? 'page' : undefined}
+          >
+            {item.texto}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a href="/colabora" class="boton boton--solido cabecera__cta">Colabora</a>
+  </div>
+
+  <!-- En móvil el menú pasa a una fila desplazable: sigue siendo navegable sin JS. -->
+  <nav class="menu menu--movil" aria-label="Principal (móvil)">
+    <div class="menu__pista">
+      {
+        navegacion.map((item) => (
+          <a
+            href={item.href}
+            class:list={['menu__enlace', { 'menu__enlace--activo': activo === item.href }]}
+            aria-current={activo === item.href ? 'page' : undefined}
+          >
+            {item.texto}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+</header>
+
+<style>
+  .cabecera {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(7, 9, 12, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .cabecera__interior {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 4.25rem;
+  }
+
+  .logo {
+    font-family: var(--fuente);
+    font-stretch: 125%;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+
+  .logo__punto {
+    color: var(--azul);
+  }
+
+  .menu--escritorio {
+    display: flex;
+    gap: 1.75rem;
+    margin-left: auto;
+  }
+
+  .cabecera__cta {
+    flex-shrink: 0;
+  }
+
+  .menu__enlace {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--papel-medio);
+    padding-block: 0.35rem;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.18s ease, border-color 0.18s ease;
+  }
+
+  .menu__enlace:hover {
+    color: var(--papel);
+  }
+
+  .menu__enlace--activo {
+    color: var(--papel);
+    border-bottom-color: var(--azul);
+  }
+
+  .menu--movil {
+    display: none;
+    border-top: 1px solid var(--linea);
+  }
+
+  .menu__pista {
+    display: flex;
+    gap: 1.4rem;
+    overflow-x: auto;
+    padding-inline: var(--margen);
+    padding-block: 0.6rem;
+    scrollbar-width: none;
+  }
+
+  .menu__pista::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .menu--escritorio {
+      display: none;
+    }
+    .menu--movil {
+      display: block;
+    }
+    .cabecera__interior {
+      justify-content: space-between;
+    }
+  }
+</style>

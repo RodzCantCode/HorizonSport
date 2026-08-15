@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import EncabezadoPagina from '../components/EncabezadoPagina.astro';
+---
+
+<Base
+  titulo="Aviso legal y privacidad"
+  descripcion="Aviso legal, política de privacidad y uso de cookies de Horizon Sport."
+>
+  <EncabezadoPagina
+    titulo="Aviso legal y privacidad"
+    entradilla="Cómo tratamos los datos que nos dejas y qué usamos para que el sitio funcione."
+  />
+
+  <section class="seccion">
+    <div class="envoltorio legal">
+      <article class="legal__bloque">
+        <h2 class="legal__titulo ancha">Titularidad</h2>
+        <p class="parrafo">
+          Este sitio pertenece al proyecto Horizon Sport. Los datos identificativos completos
+          (denominación, NIF y domicilio) se publicarán antes del lanzamiento.
+        </p>
+      </article>
+
+      <article class="legal__bloque">
+        <h2 class="legal__titulo ancha">Datos que recogemos</h2>
+        <p class="parrafo">
+          Solo tratamos los datos que nos envías voluntariamente en los formularios de la web: en
+          las candidaturas de invitado y patrocinio, tu nombre, empresa, cargo, correo y el mensaje
+          que escribas, para responderte y valorar la colaboración; en la newsletter, tu correo
+          electrónico, para enviarte aquello a lo que te suscribes.
+        </p>
+        <p class="parrafo">
+          No cedemos tus datos a terceros con fines comerciales ni los usamos para publicidad
+          externa.
+        </p>
+      </article>
+
+      <article class="legal__bloque">
+        <h2 class="legal__titulo ancha">Tus derechos</h2>
+        <p class="parrafo">
+          Puedes acceder, rectificar o suprimir tus datos, así como oponerte a su tratamiento y
+          solicitar su portabilidad, escribiéndonos al correo de contacto. También puedes darte de
+          baja de la newsletter desde el enlace que incluye cada envío. Si crees que no hemos
+          atendido bien tu solicitud, puedes reclamar ante la Agencia Española de Protección de
+          Datos.
+        </p>
+      </article>
+
+      <article class="legal__bloque">
+        <h2 class="legal__titulo ancha">Cookies</h2>
+        <p class="parrafo">
+          Esta web no instala cookies de seguimiento ni de publicidad. Si en el futuro añadimos
+          analítica o reproductores incrustados, actualizaremos esta página y pediremos tu
+          consentimiento antes de activarlos.
+        </p>
+      </article>
+
+      <article class="legal__bloque">
+        <h2 class="legal__titulo ancha">Propiedad intelectual</h2>
+        <p class="parrafo">
+          Los episodios, textos y materiales gráficos de Horizon Sport pertenecen a sus autores.
+          Puedes citarlos y enlazarlos indicando la fuente; para cualquier otro uso, escríbenos.
+        </p>
+      </article>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal {
+    max-width: 68ch;
+  }
+
+  .legal__bloque + .legal__bloque {
+    margin-top: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  .legal__titulo {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    margin-bottom: 0.75rem;
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import EncabezadoPagina from '../components/EncabezadoPagina.astro';
+import FilaEpisodio from '../components/FilaEpisodio.astro';
+import BloqueNewsletter from '../components/BloqueNewsletter.astro';
+import { episodios, episodiosProximos } from '../data/contenido.js';
+---
+
+<Base
+  titulo="Episodios"
+  activo="/episodios"
+  descripcion="Todos los episodios de Horizon Sport: fichajes, patrocinio, derechos audiovisuales y gestión deportiva."
+>
+  <EncabezadoPagina
+    titulo="Episodios"
+    entradilla="Cada conversación entra a fondo en un asunto concreto del negocio del deporte, con alguien que lo vive desde dentro."
+  />
+
+  <section class="seccion">
+    <div class="envoltorio">
+      <div class="lista">
+        {episodios.map((ep) => <FilaEpisodio episodio={ep} resumen={true} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--alterna">
+    <div class="envoltorio">
+      <h2 class="titular-seccion ancha">Grabados, pendientes de edición</h2>
+
+      <ul class="proximos">
+        {
+          episodiosProximos.map((ep) => (
+            <li class="proximos__fila">
+              <span class="estrecha">Ep {ep.numero}</span>
+              <p class="proximos__pista">{ep.pista}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <BloqueNewsletter />
+</Base>
+
+<style>
+  .lista {
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .proximos {
+    margin-top: clamp(1.25rem, 2.5vw, 1.75rem);
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .proximos__fila {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding-block: 1.1rem;
+    border-top: 1px solid var(--linea);
+  }
+
+  .proximos__pista {
+    color: var(--papel-medio);
+    margin: 0;
+  }
+
+  @media (max-width: 700px) {
+    .proximos__fila {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.35rem;
+    }
+  }
+</style>

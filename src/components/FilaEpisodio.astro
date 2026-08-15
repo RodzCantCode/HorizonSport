@@ -1,0 +1,65 @@
+---
+const { episodio, resumen = false } = Astro.props;
+---
+
+<article class="episodio">
+  <div class="episodio__numero estrecha" aria-hidden="true">Ep {episodio.numero}</div>
+
+  <div>
+    <h3 class="episodio__titulo">
+      <span class="solo-lectores">Episodio {episodio.numero}: </span>{episodio.titulo}
+    </h3>
+    <p class="dato episodio__meta">
+      {episodio.invitado} · {episodio.contexto} · <time datetime={episodio.fecha}>{episodio.fechaTexto}</time> · {episodio.duracion}
+    </p>
+    {resumen && <p class="parrafo episodio__resumen">{episodio.resumen}</p>}
+  </div>
+
+  <div>
+    <a href="#" class="boton">Escuchar</a>
+  </div>
+</article>
+
+<style>
+  .episodio {
+    display: grid;
+    grid-template-columns: 5rem 1fr auto;
+    gap: 1.5rem;
+    align-items: start;
+    padding-block: 1.75rem;
+    border-top: 1px solid var(--linea);
+  }
+
+  .episodio__numero {
+    padding-top: 0.5rem;
+  }
+
+  .episodio__titulo {
+    font-weight: 600;
+    font-size: clamp(1.2rem, 2.3vw, 1.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin: 0;
+    max-width: 28ch;
+  }
+
+  .episodio__meta {
+    margin-top: 0.5rem;
+  }
+
+  .episodio__resumen {
+    margin-top: 0.85rem;
+    font-size: 0.9375rem;
+    max-width: 58ch;
+  }
+
+  @media (max-width: 700px) {
+    .episodio {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+    .episodio__numero {
+      padding-top: 0;
+    }
+  }
+</style>

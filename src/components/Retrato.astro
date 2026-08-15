@@ -1,0 +1,67 @@
+---
+// `foto` es el slug del archivo en public/fotos (p. ej. 'mario' -> mario-900.webp).
+// Si es null se muestra un hueco a rayas en vez de una imagen rota.
+const { foto = null, nombre = '', rol = '', ratio = '4 / 5' } = Astro.props;
+---
+
+{
+  foto ? (
+    <img
+      class="retrato"
+      src={`/fotos/${foto}-900.webp`}
+      srcset={`/fotos/${foto}-450.webp 450w, /fotos/${foto}-900.webp 900w`}
+      sizes="(max-width: 620px) 100vw, (max-width: 860px) 50vw, 33vw"
+      width="900"
+      height="1125"
+      alt={`Retrato de ${nombre}`}
+      loading="lazy"
+      decoding="async"
+      style={`aspect-ratio:${ratio}`}
+    />
+  ) : (
+    <div class="retrato retrato--reserva" style={`aspect-ratio:${ratio}`} aria-hidden="true">
+      <span class="retrato__marca">Foto</span>
+      {rol && <span class="retrato__rol">{rol}</span>}
+    </div>
+  )
+}
+
+<style>
+  .retrato {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border: 1px solid var(--linea);
+    border-radius: 3px;
+    background: var(--tinta-600);
+  }
+
+  .retrato--reserva {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--tinta-600),
+      var(--tinta-600) 8px,
+      var(--tinta-700) 8px,
+      var(--tinta-700) 16px
+    );
+  }
+
+  .retrato__marca {
+    font-stretch: 75%;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--papel-tenue);
+  }
+
+  .retrato__rol {
+    font-size: 0.75rem;
+    color: var(--papel-tenue);
+  }
+</style>

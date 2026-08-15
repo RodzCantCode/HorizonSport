@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="perdida">
+    <div class="envoltorio">
+      <p class="estrecha">Error 404</p>
+      <h1 class="titular-pagina ancha perdida__titulo">Esta página no existe</h1>
+      <p class="entradilla perdida__texto">
+        El enlace está roto o la página cambió de sitio.
+      </p>
+      <div class="fila perdida__acciones">
+        <a href="/" class="boton boton--solido">Volver al inicio</a>
+        <a href="/episodios" class="boton">Ver episodios</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .perdida {
+    padding-block: clamp(4rem, 12vw, 9rem);
+  }
+
+  .perdida__titulo {
+    margin-top: 0.9rem;
+  }
+
+  .perdida__texto {
+    margin-top: 1.35rem;
+  }
+
+  .perdida__acciones {
+    margin-top: 2rem;
+  }
+</style>

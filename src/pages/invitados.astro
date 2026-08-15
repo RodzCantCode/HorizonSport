@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import EncabezadoPagina from '../components/EncabezadoPagina.astro';
+import { invitados } from '../data/contenido.js';
+---
+
+<Base
+  titulo="Invitados"
+  activo="/invitados"
+  descripcion="Profesionales que han pasado por Horizon Sport: agentes, directivos, consultores y responsables de marketing deportivo."
+>
+  <EncabezadoPagina
+    titulo="Invitados"
+    entradilla="La lista crece con cada episodio. Si trabajas en el sector y tienes algo que contar, el siguiente puedes ser tú."
+  />
+
+  <section class="seccion">
+    <div class="envoltorio">
+      <ul class="lista">
+        {
+          invitados.map((inv) => (
+            <li class="fila-inv">
+              <span class="estrecha">Ep {inv.episodio}</span>
+              <div>
+                <p class:list={['titular-tarjeta', { 'fila-inv--pendiente': !inv.publicado }]}>
+                  {inv.publicado ? inv.nombre : 'Por anunciar'}
+                </p>
+                <p class="dato">{inv.rol}</p>
+              </div>
+              {inv.publicado && (
+                <a href="/episodios" class="boton">
+                  Ver episodio
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion seccion--alterna seccion--ajustada">
+    <div class="envoltorio llamada">
+      <h2 class="titular-seccion ancha">Postula como invitado</h2>
+      <a href="/colabora#invitado" class="boton boton--solido">Quiero participar</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lista {
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .fila-inv {
+    display: grid;
+    grid-template-columns: 5rem 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    padding-block: 1.35rem;
+    border-top: 1px solid var(--linea);
+  }
+
+  .fila-inv--pendiente {
+    color: var(--papel-tenue);
+    font-weight: 500;
+  }
+
+  .llamada {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2.5rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 700px) {
+    .fila-inv {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.5rem;
+      align-items: start;
+    }
+  }
+</style>

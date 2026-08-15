@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Env
+.env
+.env.*
+
+# Brainstorming visual companion (mockups, not source)
+.superpowers/
+
+# OS / editor
+.DS_Store
+Thumbs.db

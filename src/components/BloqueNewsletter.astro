@@ -1,0 +1,60 @@
+---
+const { fondo = 'base' } = Astro.props;
+---
+
+<section class:list={['boletin', { 'boletin--alterno': fondo === 'alterno' }]} aria-labelledby="boletin-titulo">
+  <div class="envoltorio boletin__interior">
+    <h2 class="titular-seccion ancha boletin__titulo" id="boletin-titulo">
+      El análisis, cada semana en tu correo
+    </h2>
+
+    <form class="boletin__form" method="post" action="#">
+      <label class="solo-lectores" for="boletin-email">Tu correo electrónico</label>
+      <input
+        class="boletin-input"
+        id="boletin-email"
+        name="email"
+        type="email"
+        required
+        placeholder="tu@empresa.com"
+        autocomplete="email"
+      />
+      <button type="submit" class="boton boton--solido">Suscribirme</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .boletin {
+    padding-block: clamp(2.75rem, 6vw, 4.5rem);
+  }
+
+  .boletin--alterno {
+    background: var(--tinta-800);
+    border-block: 1px solid var(--linea);
+  }
+
+  .boletin__interior {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.75rem 3rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .boletin__titulo {
+    max-width: 20ch;
+  }
+
+  .boletin__form {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .boletin__form .boletin-input {
+    width: auto;
+    min-width: 15rem;
+    flex: 1;
+  }
+</style>

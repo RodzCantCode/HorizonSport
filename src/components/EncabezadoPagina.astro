@@ -1,0 +1,21 @@
+---
+const { titulo, entradilla = null } = Astro.props;
+---
+
+<section class="encabezado-pagina">
+  <div class="envoltorio">
+    <h1 class="titular-pagina ancha">{titulo}</h1>
+    {entradilla && <p class="entradilla encabezado-pagina__entradilla">{entradilla}</p>}
+  </div>
+</section>
+
+<style>
+  .encabezado-pagina {
+    padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .encabezado-pagina__entradilla {
+    margin-top: 1.5rem;
+  }
+</style>

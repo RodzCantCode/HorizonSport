@@ -1,0 +1,146 @@
+---
+import { navegacion, plataformas } from '../data/contenido.js';
+const anio = new Date().getFullYear();
+---
+
+<footer class="pie">
+  <div class="envoltorio">
+    <div class="pie__rejilla">
+      <div>
+        <p class="pie__logo">Horizon<span class="pie__punto">.</span>Sport</p>
+        <p class="parrafo pie__claim">
+          El podcast del negocio del deporte. Conversaciones con quienes dirigen la industria.
+        </p>
+      </div>
+
+      <nav aria-labelledby="pie-secciones">
+        <h2 class="pie__titulo" id="pie-secciones">Secciones</h2>
+        <ul class="pie__lista">
+          {navegacion.map((i) => <li><a class="pie__enlace" href={i.href}>{i.texto}</a></li>)}
+          <li><a class="pie__enlace" href="/colabora">Colabora</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="pie-plataformas">
+        <h2 class="pie__titulo" id="pie-plataformas">Escúchanos</h2>
+        <ul class="pie__lista">
+          {
+            plataformas.map((p) => (
+              <li>
+                <a class="pie__enlace" href={p.url}>
+                  {p.nombre}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="pie__titulo">Newsletter</h2>
+        <p class="dato pie__nota">
+          El análisis de cada episodio, en tu correo. Sin spam, cancelas cuando quieras.
+        </p>
+        <a href="/newsletter" class="boton pie__boton">Suscribirme</a>
+      </div>
+    </div>
+
+    <hr class="regla pie__regla" />
+
+    <div class="pie__legal">
+      <p class="dato">© {anio} Horizon Sport</p>
+      <p class="dato"><a class="pie__enlace" href="/legal">Aviso legal y privacidad</a></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pie {
+    background: var(--tinta-850);
+    border-top: 1px solid var(--linea);
+    padding-block: clamp(2.75rem, 6vw, 4.5rem) 2rem;
+  }
+
+  .pie__rejilla {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+    gap: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  .pie__logo {
+    font-family: var(--fuente);
+    font-stretch: 125%;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .pie__punto {
+    color: var(--azul);
+  }
+
+  .pie__claim {
+    font-size: 0.875rem;
+    max-width: 32ch;
+  }
+
+  .pie__titulo {
+    font-stretch: 75%;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--papel-tenue);
+    margin: 0 0 0.9rem;
+  }
+
+  .pie__lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .pie__enlace {
+    font-size: 0.875rem;
+    color: var(--papel-medio);
+    transition: color 0.18s ease;
+  }
+
+  .pie__enlace:hover {
+    color: var(--azul);
+  }
+
+  .pie__nota {
+    margin-bottom: 0.9rem;
+    max-width: 30ch;
+  }
+
+  .pie__boton {
+    font-size: 0.8125rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .pie__regla {
+    margin-block: clamp(2rem, 4vw, 3rem) 1.25rem;
+  }
+
+  .pie__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 860px) {
+    .pie__rejilla {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 520px) {
+    .pie__rejilla {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

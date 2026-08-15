@@ -1,0 +1,60 @@
+---
+const { compacto = false } = Astro.props;
+---
+
+<section class="colabora" aria-labelledby="colabora-titulo">
+  <div class="envoltorio">
+    <h2 class="titular-seccion ancha colabora__titulo" id="colabora-titulo">
+      Pon tu voz o tu marca en Horizon Sport
+    </h2>
+
+    <div class="rejilla rejilla--2 colabora__rejilla">
+      <article class="tarjeta tarjeta--decision">
+        <span class="estrecha">Profesionales</span>
+        <h3 class="titular-tarjeta colabora__sub">Ser invitado</h3>
+        <p class="parrafo colabora__texto">
+          Si trabajas en gestión, patrocinio, medios o representación, tienes una conversación que
+          nuestra audiencia quiere escuchar.
+        </p>
+        <a href="/colabora#invitado" class="boton boton--solido">Postular</a>
+      </article>
+
+      <article class="tarjeta tarjeta--decision">
+        <span class="estrecha">Marcas</span>
+        <h3 class="titular-tarjeta colabora__sub">Patrocinar</h3>
+        <p class="parrafo colabora__texto">
+          Llegas a decisores del sector, no a audiencia genérica. Formatos de integración a medida.
+        </p>
+        <div class="fila">
+          <a href="/colabora#patrocinio" class="boton boton--solido">Ver oportunidades</a>
+          <a href="/colabora#media-kit" class="boton">Media kit</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .colabora {
+    padding-block: var(--aire);
+    border-block: 1px solid var(--linea);
+    background: var(--tinta-800);
+  }
+
+  .colabora__titulo {
+    max-width: 20ch;
+  }
+
+  .colabora__rejilla {
+    margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  }
+
+  .colabora__sub {
+    margin-block: 0.6rem 0.5rem;
+  }
+
+  .colabora__texto {
+    font-size: 0.9375rem;
+    margin-bottom: 1.35rem;
+  }
+</style>

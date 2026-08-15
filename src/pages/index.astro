@@ -1,0 +1,187 @@
+---
+import Base from '../layouts/Base.astro';
+import FilaEpisodio from '../components/FilaEpisodio.astro';
+import BloqueColabora from '../components/BloqueColabora.astro';
+import BloqueNewsletter from '../components/BloqueNewsletter.astro';
+import Retrato from '../components/Retrato.astro';
+import { episodios, hosts, invitados, plataformas } from '../data/contenido.js';
+
+const publicados = invitados.filter((i) => i.publicado);
+---
+
+<Base activo="/">
+  <section class="hero">
+    <div class="envoltorio">
+      <h1 class="titular-hero ancha">El partido se juega en los despachos</h1>
+
+      <p class="entradilla hero__entradilla">
+        El podcast del negocio del deporte. Conversaciones con directivos, agentes, marcas y
+        gestores sobre lo que no se ve desde la grada.
+      </p>
+
+      <div class="fila hero__acciones">
+        <a href="/episodios" class="boton boton--solido">Escuchar los episodios</a>
+        <a href="/colabora" class="boton">Quiero participar</a>
+      </div>
+
+      <p class="dato hero__plataformas">
+        {plataformas.map((p, i) => (
+          <>
+            <a class="enlace" href={p.url}>{p.nombre}</a>{i < plataformas.length - 1 ? '   ·   ' : ''}
+          </>
+        ))}
+      </p>
+    </div>
+  </section>
+
+  <section class="seccion seccion--alterna">
+    <div class="envoltorio">
+      <p class="manifiesto">
+        Todo el mundo habla de lo que pasa en el campo. Nosotros hablamos de lo que pasa en los
+        despachos.
+      </p>
+      <div class="manifiesto__texto">
+        <p class="parrafo">
+          Detrás de cada fichaje hay una negociación, detrás de cada patrocinio un cálculo de
+          retorno y detrás de cada retransmisión una subasta de derechos. Son las decisiones que
+          explican el deporte profesional y casi nunca se cuentan bien.
+        </p>
+        <p class="parrafo">
+          Preguntamos por los números, los contratos y los incentivos, con gente que los ha
+          firmado.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="envoltorio">
+      <div class="encabezado">
+        <h2 class="titular-seccion ancha">Episodios</h2>
+        <a href="/episodios" class="boton">Ver todos</a>
+      </div>
+
+      <div class="lista">
+        {episodios.map((ep) => <FilaEpisodio episodio={ep} />)}
+      </div>
+    </div>
+  </section>
+
+  <BloqueColabora />
+
+  <section class="seccion">
+    <div class="envoltorio">
+      <div class="encabezado">
+        <h2 class="titular-seccion ancha">Invitados</h2>
+        <a href="/invitados" class="boton">Ver todos</a>
+      </div>
+
+      <ul class="invitados">
+        {
+          publicados.map((inv) => (
+            <li class="invitados__fila">
+              <span class="estrecha">Ep {inv.episodio}</span>
+              <p class="titular-tarjeta">{inv.nombre}</p>
+              <p class="dato">{inv.rol}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion seccion--alterna">
+    <div class="envoltorio">
+      <div class="encabezado">
+        <h2 class="titular-seccion ancha">Quiénes somos</h2>
+        <a href="/sobre-nosotros" class="boton">Conócenos</a>
+      </div>
+
+      <ul class="rejilla rejilla--3">
+        {
+          hosts.map((h) => (
+            <li>
+              <Retrato foto={h.foto} nombre={h.nombre} rol={h.rol} />
+              <p class="titular-tarjeta host__nombre">{h.nombre}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <BloqueNewsletter />
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(3.5rem, 11vw, 8.5rem) clamp(3rem, 8vw, 6rem);
+  }
+
+  .hero__entradilla {
+    margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+  }
+
+  .hero__acciones {
+    margin-top: 2rem;
+  }
+
+  .hero__plataformas {
+    margin-top: 2.25rem;
+  }
+
+  .manifiesto {
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    max-width: 24ch;
+    margin: 0;
+  }
+
+  .manifiesto__texto {
+    margin-top: clamp(1.75rem, 4vw, 2.5rem);
+  }
+
+  .encabezado {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  .lista {
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .invitados__fila {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    gap: 0.15rem 1.5rem;
+    padding-block: 1.25rem;
+    border-top: 1px solid var(--linea);
+  }
+
+  .invitados__fila .estrecha {
+    grid-row: span 2;
+    padding-top: 0.35rem;
+  }
+
+  .host__nombre {
+    margin-top: 0.9rem;
+  }
+
+  @media (max-width: 700px) {
+    .invitados__fila {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.15rem;
+    }
+    .invitados__fila .estrecha {
+      grid-row: auto;
+      padding-top: 0;
+      margin-bottom: 0.35rem;
+    }
+  }
+</style>

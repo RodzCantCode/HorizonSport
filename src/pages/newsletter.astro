@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+import EncabezadoPagina from '../components/EncabezadoPagina.astro';
+---
+
+<Base
+  titulo="Newsletter"
+  activo="/newsletter"
+  descripcion="La newsletter de Horizon Sport: el análisis de cada episodio y las ideas del negocio del deporte que no caben en el audio."
+>
+  <EncabezadoPagina
+    titulo="El negocio del deporte, en tu correo"
+    entradilla="Lo esencial de cada episodio más lo que no cabe en el audio. Un envío por semana."
+  />
+
+  <section class="seccion">
+    <div class="envoltorio">
+      <form class="alta__form" method="post" action="#">
+        <label class="solo-lectores" for="alta-email">Tu correo electrónico</label>
+        <input
+          class="boletin-input"
+          id="alta-email"
+          name="email"
+          type="email"
+          required
+          placeholder="tu@empresa.com"
+          autocomplete="email"
+        />
+        <button type="submit" class="boton boton--solido">Suscribirme</button>
+      </form>
+      <p class="dato alta__nota">Cada jueves · cancelas cuando quieras</p>
+
+      <ul class="alta__ventajas">
+        <li class="alta__fila">
+          <p class="titular-tarjeta">El episodio, resumido</p>
+          <p class="parrafo alta__texto">
+            Las tres ideas que te llevarías si lo escucharas entero.
+          </p>
+        </li>
+        <li class="alta__fila">
+          <p class="titular-tarjeta">Lo que se mueve</p>
+          <p class="parrafo alta__texto">
+            Operaciones y acuerdos del sector, con el contexto que la nota de prensa no trae.
+          </p>
+        </li>
+        <li class="alta__fila">
+          <p class="titular-tarjeta">Antes que nadie</p>
+          <p class="parrafo alta__texto">
+            Quién viene la semana siguiente, y puedes mandarnos preguntas para el invitado.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .alta__form {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    max-width: 32rem;
+  }
+
+  .alta__form .boletin-input {
+    width: auto;
+    min-width: 14rem;
+    flex: 1;
+  }
+
+  .alta__nota {
+    margin-top: 0.85rem;
+  }
+
+  .alta__ventajas {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .alta__fila {
+    padding-block: 1.35rem;
+    border-top: 1px solid var(--linea);
+  }
+
+  .alta__texto {
+    margin-top: 0.35rem;
+    font-size: 0.9375rem;
+  }
+</style>

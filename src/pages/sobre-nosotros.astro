@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import EncabezadoPagina from '../components/EncabezadoPagina.astro';
+import Retrato from '../components/Retrato.astro';
+import BloqueColabora from '../components/BloqueColabora.astro';
+import { hosts } from '../data/contenido.js';
+---
+
+<Base
+  titulo="Sobre nosotros"
+  activo="/sobre-nosotros"
+  descripcion="Quiénes están detrás de Horizon Sport y por qué contamos el deporte desde el lado del negocio."
+>
+  <EncabezadoPagina
+    titulo="Tres voces, un mismo foco"
+    entradilla="Nos juntamos porque los tres echábamos en falta el mismo programa: uno que hablara del deporte por el lado del negocio."
+  />
+
+  <section class="seccion">
+    <div class="envoltorio">
+      <ul class="rejilla rejilla--3">
+        {
+          hosts.map((h) => (
+            <li>
+              <Retrato foto={h.foto} nombre={h.nombre} rol={h.rol} />
+              <p class="titular-tarjeta host__nombre">{h.nombre}</p>
+              {h.rol && <p class="estrecha host__rol">{h.rol}</p>}
+              {h.bio && <p class="parrafo host__bio">{h.bio}</p>}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion seccion--alterna">
+    <div class="envoltorio">
+      <p class="mision">
+        Dar voz a quienes construyen la industria del deporte desde dentro.
+      </p>
+      <div class="mision__texto">
+        <p class="parrafo">
+          Hay mucho contenido sobre lo que ocurre en el campo y muy poco sobre lo que lo hace
+          posible. Los presupuestos, los contratos, las estructuras de propiedad y las decisiones
+          comerciales explican buena parte de lo que después se celebra o se sufre en la grada.
+        </p>
+        <p class="parrafo">
+          No pretendemos ser el podcast más escuchado, sino el que escucha la gente que trabaja en
+          esto.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <BloqueColabora compacto={true} />
+</Base>
+
+<style>
+  .host__nombre {
+    margin-top: 1rem;
+  }
+
+  .host__rol {
+    color: var(--azul);
+    margin-top: 0.3rem;
+  }
+
+  .host__bio {
+    margin-top: 0.65rem;
+    font-size: 0.9375rem;
+  }
+
+  .mision {
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    max-width: 24ch;
+    margin: 0;
+  }
+
+  .mision__texto {
+    margin-top: clamp(1.75rem, 4vw, 2.5rem);
+  }
+</style>
