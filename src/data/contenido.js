@@ -6,7 +6,7 @@ export const marca = {
   nombre: 'Horizon Sport',
   claim: 'El podcast del negocio del deporte',
   descripcion:
-    'Conversaciones con quienes dirigen la industria del deporte: directivos, agentes, marcas y gestores. El lado que no se ve desde la grada.',
+    'Conversaciones con quienes viven la industria del deporte por dentro: deportistas, entrenadores, marcas y gestores. El lado que no se ve desde la grada.',
 };
 
 export const episodios = [
@@ -52,12 +52,26 @@ export const episodiosProximos = [
   { numero: '06', pista: 'Por anunciar' },
 ];
 
-// Retratos reales. Rol y bio quedan vacíos a propósito: no inventamos datos
-// sobre personas identificables. Añadirlos cuando los pasen ellos.
+// El reparto societario del proyecto es información interna y no se publica.
 export const hosts = [
-  { nombre: 'Izan', rol: null, bio: null, foto: 'izan' },
-  { nombre: 'Lluís', rol: null, bio: null, foto: 'lluis' },
-  { nombre: 'Mario', rol: null, bio: null, foto: 'mario' },
+  {
+    nombre: 'Izan',
+    rol: 'Host principal · Negocio',
+    bio: 'Lidera el proyecto y lleva la voz principal del podcast. Aunque también se mete en la parte audiovisual, su terreno es la operativa de negocio: activación de patrocinios y acuerdos de colaboración.',
+    foto: 'izan',
+  },
+  {
+    nombre: 'Lluís',
+    rol: 'Host · Contenido',
+    bio: 'Host y responsable de la estrategia de contenido en redes. Lleva además la dirección audiovisual de los proyectos que vienen después del podcast.',
+    foto: 'lluis',
+  },
+  {
+    nombre: 'Mario',
+    rol: 'Técnico · Audiovisual',
+    bio: 'El técnico. Está detrás de las cámaras cuidando que cada grabación salga como tiene que salir, y lleva la digitalización del proyecto y las colaboraciones con marcas.',
+    foto: 'mario',
+  },
 ];
 
 export const invitados = [

@@ -15,7 +15,7 @@ const publicados = invitados.filter((i) => i.publicado);
       <h1 class="titular-hero ancha">El partido se juega en los despachos</h1>
 
       <p class="entradilla hero__entradilla">
-        El podcast del negocio del deporte. Conversaciones con directivos, agentes, marcas y
+        El podcast del negocio del deporte. Conversaciones con deportistas, entrenadores, marcas y
         gestores sobre lo que no se ve desde la grada.
       </p>
 
@@ -42,9 +42,9 @@ const publicados = invitados.filter((i) => i.publicado);
       </p>
       <div class="manifiesto__texto">
         <p class="parrafo">
-          Detrás de cada fichaje hay una negociación, detrás de cada patrocinio un cálculo de
-          retorno y detrás de cada retransmisión una subasta de derechos. Son las decisiones que
-          explican el deporte profesional y casi nunca se cuentan bien.
+          Detrás de cada patrocinio hay un cálculo de retorno, detrás de cada carrera deportiva una
+          estructura que la sostiene y detrás de cada evento, alguien que ha hecho las cuentas. Son
+          las decisiones que explican el deporte profesional y casi nunca se cuentan bien.
         </p>
         <p class="parrafo">
           Preguntamos por los números, los contratos y los incentivos, con gente que los ha
@@ -103,6 +103,7 @@ const publicados = invitados.filter((i) => i.publicado);
             <li>
               <Retrato foto={h.foto} nombre={h.nombre} rol={h.rol} />
               <p class="titular-tarjeta host__nombre">{h.nombre}</p>
+              {h.rol && <p class="estrecha host__rol">{h.rol}</p>}
             </li>
           ))
         }
@@ -171,6 +172,12 @@ const publicados = invitados.filter((i) => i.publicado);
 
   .host__nombre {
     margin-top: 0.9rem;
+  }
+
+  .host__rol {
+    display: block;
+    color: var(--azul);
+    margin-top: 0.3rem;
   }
 
   @media (max-width: 700px) {
