@@ -25,7 +25,7 @@ import { invitados } from '../data/contenido.js';
                 <p class:list={['titular-tarjeta', { 'fila-inv--pendiente': !inv.publicado }]}>
                   {inv.publicado ? inv.nombre : 'Por anunciar'}
                 </p>
-                <p class="dato">{inv.rol}</p>
+                {inv.rol && <p class="dato">{inv.rol}</p>}
               </div>
               {inv.publicado && (
                 <a href="/episodios" class="boton">

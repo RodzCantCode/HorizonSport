@@ -12,47 +12,44 @@ export const marca = {
 export const episodios = [
   {
     numero: '01',
-    titulo: 'Cuánto vale realmente un fichaje',
-    invitado: 'Agente FIFA',
-    contexto: 'Representación de futbolistas',
+    titulo: 'El negocio del boxeo y el efecto Velada',
+    invitado: 'Ramón Lord y Clara López',
+    contexto: 'Entrenador y boxeadora',
     duracion: '48 min',
     fecha: '2026-08-06',
     fechaTexto: '6 de agosto',
     resumen:
-      'La cifra que sale en prensa casi nunca es la que se firma. Desglosamos cómo se construye una operación: variables, comisiones, derechos de imagen y por qué el mismo jugador vale cosas distintas según quién compre.',
-    temas: ['Fichajes', 'Representación'],
+      'Ramón Lord entrena boxeo desde hace años, formado en la escuela cubana. Clara López apunta a campeona de España en su peso. Con los dos repasamos el estado del boxeo, entramos en el debate de la Velada de Ibai y hablamos de cómo se sostiene económicamente el deporte por debajo de las grandes veladas.',
   },
   {
     numero: '02',
-    titulo: 'El patrocinio dejó de ser un logo en la camiseta',
-    invitado: 'Directora de Marketing',
-    contexto: 'Marca deportiva internacional',
+    titulo: 'Vivir de las MMA en España',
+    invitado: 'Santi Higuera',
+    contexto: 'Luchador de MMA',
     duracion: '52 min',
     fecha: '2026-08-13',
     fechaTexto: '13 de agosto',
     resumen:
-      'Qué compra hoy una marca cuando patrocina, cómo se mide el retorno y por qué los acuerdos que solo aportan visibilidad están desapareciendo de los presupuestos.',
-    temas: ['Patrocinio', 'Marketing'],
+      'Qué hay detrás de una carrera en artes marciales mixtas: de dónde sale el dinero, qué pesa más entre el resultado y la repercusión, y cómo se gestiona la exposición pública. Hablamos también, sin rodeos, de su pelea contra Leo Climent.',
   },
   {
     numero: '03',
-    titulo: 'Quién paga los derechos de televisión',
-    invitado: 'Consultor de medios deportivos',
-    contexto: 'Asesoría en derechos audiovisuales',
+    titulo: 'El negocio detrás de unos guantes de boxeo',
+    invitado: 'Javi Echaleku',
+    contexto: 'Marca de guantes y accesorios',
     duracion: '45 min',
-    fecha: '2026-08-20',
-    fechaTexto: '20 de agosto',
+    fecha: '2026-08-19',
+    fechaTexto: '19 de agosto',
     resumen:
-      'El dinero que sostiene al deporte profesional viene de las pantallas. Repasamos cómo se subastan los derechos, qué cambia con las plataformas y qué pasa cuando la burbuja deja de crecer.',
-    temas: ['Derechos TV', 'Medios'],
+      'Montar una marca de material deportivo desde dentro del propio deporte: producción, márgenes, distribución y qué papel juegan los deportistas que lo llevan puesto. El negocio de la ropa y los accesorios, contado por quien fabrica.',
   },
 ];
 
-// Grabados y pendientes de edición: se anuncian sin desvelar invitado.
+// Grabados y pendientes de edición: se anuncian cuando hay fecha.
 export const episodiosProximos = [
-  { numero: '04', pista: 'Gestión de clubes y control económico' },
-  { numero: '05', pista: 'Deporte femenino como oportunidad de negocio' },
-  { numero: '06', pista: 'Datos y scouting: qué se compra y qué se vende' },
+  { numero: '04', pista: 'Por anunciar' },
+  { numero: '05', pista: 'Por anunciar' },
+  { numero: '06', pista: 'Por anunciar' },
 ];
 
 // Retratos reales. Rol y bio quedan vacíos a propósito: no inventamos datos
@@ -64,27 +61,13 @@ export const hosts = [
 ];
 
 export const invitados = [
-  {
-    nombre: 'Agente FIFA',
-    rol: 'Representación de futbolistas',
-    episodio: '01',
-    publicado: true,
-  },
-  {
-    nombre: 'Directora de Marketing',
-    rol: 'Marca deportiva internacional',
-    episodio: '02',
-    publicado: true,
-  },
-  {
-    nombre: 'Consultor de medios',
-    rol: 'Derechos audiovisuales',
-    episodio: '03',
-    publicado: true,
-  },
-  { nombre: null, rol: 'Gestión de clubes', episodio: '04', publicado: false },
-  { nombre: null, rol: 'Deporte femenino', episodio: '05', publicado: false },
-  { nombre: null, rol: 'Datos y scouting', episodio: '06', publicado: false },
+  { nombre: 'Ramón Lord', rol: 'Entrenador de boxeo', episodio: '01', publicado: true },
+  { nombre: 'Clara López', rol: 'Boxeadora', episodio: '01', publicado: true },
+  { nombre: 'Santi Higuera', rol: 'Luchador de MMA', episodio: '02', publicado: true },
+  { nombre: 'Javi Echaleku', rol: 'Marca de guantes y accesorios', episodio: '03', publicado: true },
+  { nombre: null, rol: null, episodio: '04', publicado: false },
+  { nombre: null, rol: null, episodio: '05', publicado: false },
+  { nombre: null, rol: null, episodio: '06', publicado: false },
 ];
 
 export const plataformas = [
