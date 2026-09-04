@@ -1,217 +1,194 @@
 ---
-// Portada de espera. Mientras está activa, `vercel.json` reescribe cualquier ruta
-// aquí: el resto del sitio no es alcanzable hasta el lanzamiento.
-// Para devolver la web completa: revertir el commit que la puso, o mover de nuevo
-// `src/paginas-en-espera/` a `src/pages/` y borrar los `rewrites` de vercel.json.
-import '../styles/global.css';
-import { marca } from '../data/contenido.js';
+import Base from '../layouts/Base.astro';
+import FilaEpisodio from '../components/FilaEpisodio.astro';
+import BloqueColabora from '../components/BloqueColabora.astro';
+import BloqueNewsletter from '../components/BloqueNewsletter.astro';
+import Retrato from '../components/Retrato.astro';
+import { episodios, hosts, invitados, plataformas } from '../data/contenido.js';
 
-// Instante del estreno con zona horaria explícita (CEST, UTC+2 en septiembre):
-// así la cuenta atrás es correcta desde cualquier país.
-const ESTRENO = '2026-09-04T19:00:00+02:00';
-const HORA_TEXTO = 'hoy a las 19:00 (hora peninsular)';
-
-const VIDEO = 'https://www.youtube.com/watch?v=-JBS4m7dXkM&t=13s';
-
-const titulo = `${marca.nombre} — Estreno ${HORA_TEXTO}`;
-const descripcion =
-  'El podcast del negocio del deporte se estrena hoy a las 19:00. Primer episodio: Santi Higuera, de pelear en el anonimato a WOW FC.';
-const canonica = new URL(Astro.url.pathname, Astro.site).href;
-const imagen = new URL('/og-estreno.jpg', Astro.site).href;
+const publicados = invitados.filter((i) => i.publicado);
 ---
 
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{titulo}</title>
-    <meta name="description" content={descripcion} />
-    <meta name="theme-color" content="#07090C" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="canonical" href={canonica} />
+<Base activo="/">
+  <section class="hero">
+    <div class="envoltorio">
+      <h1 class="titular-hero ancha">El partido se juega en los despachos</h1>
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonica} />
-    <meta property="og:site_name" content={marca.nombre} />
-    <meta property="og:title" content={titulo} />
-    <meta property="og:description" content={descripcion} />
-    <meta property="og:image" content={imagen} />
-    <meta property="og:image:width" content="1280" />
-    <meta property="og:image:height" content="720" />
-    <meta property="og:locale" content="es_ES" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content={imagen} />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap"
-    />
-  </head>
-
-  <body class="espera">
-    <main class="espera__caja">
-      <p class="estrecha espera__marca">{marca.nombre}</p>
-
-      <h1 class="ancha espera__titular" data-titular>
-        Hoy a las <span class="espera__hora">19:00</span>
-      </h1>
-
-      <p class="espera__linea" data-linea>
-        Se estrena el primer episodio y abre la web.
+      <p class="entradilla hero__entradilla">
+        El podcast del negocio del deporte. Conversaciones con deportistas, entrenadores, marcas y
+        gestores sobre lo que no se ve desde la grada.
       </p>
 
-      <!--
-        Los dígitos cambian cada segundo: se ocultan al lector de pantalla y en su
-        lugar va una frase estática con la misma información.
-      -->
-      <p class="visualmente-oculto" data-alternativa>
-        El estreno es {HORA_TEXTO}.
-      </p>
-
-      <div class="cuenta" data-cuenta aria-hidden="true" hidden>
-        <div class="cuenta__par">
-          <span class="ancha cuenta__cifra" data-horas>00</span>
-          <span class="estrecha cuenta__unidad">horas</span>
-        </div>
-        <div class="cuenta__par">
-          <span class="ancha cuenta__cifra" data-minutos>00</span>
-          <span class="estrecha cuenta__unidad">min</span>
-        </div>
-        <div class="cuenta__par">
-          <span class="ancha cuenta__cifra" data-segundos>00</span>
-          <span class="estrecha cuenta__unidad">seg</span>
-        </div>
+      <div class="fila hero__acciones">
+        <a href="/episodios" class="boton boton--solido">Escuchar los episodios</a>
+        <a href="/colabora" class="boton">Quiero participar</a>
       </div>
 
-      <a class="boton boton--solido espera__cta" href={VIDEO} rel="noopener">
-        Ver el estreno en YouTube
-      </a>
-    </main>
+      <p class="dato hero__plataformas">
+        {plataformas.map((p, i) => (
+          <>
+            <a class="enlace" href={p.url}>{p.nombre}</a>{i < plataformas.length - 1 ? '   ·   ' : ''}
+          </>
+        ))}
+      </p>
+    </div>
+  </section>
 
-    <script is:inline define:vars={{ ESTRENO }}>
-      (function () {
-        const destino = new Date(ESTRENO).getTime();
-        const caja = document.querySelector('[data-cuenta]');
-        const titular = document.querySelector('[data-titular]');
-        const linea = document.querySelector('[data-linea]');
-        const alternativa = document.querySelector('[data-alternativa]');
-        const horas = document.querySelector('[data-horas]');
-        const minutos = document.querySelector('[data-minutos]');
-        const segundos = document.querySelector('[data-segundos]');
+  <section class="seccion seccion--alterna">
+    <div class="envoltorio">
+      <p class="manifiesto">
+        Todo el mundo habla de lo que pasa en el campo. Nosotros hablamos de lo que pasa en los
+        despachos.
+      </p>
+      <div class="manifiesto__texto">
+        <p class="parrafo">
+          Detrás de cada patrocinio hay un cálculo de retorno, detrás de cada carrera deportiva una
+          estructura que la sostiene y detrás de cada evento, alguien que ha hecho las cuentas. Son
+          las decisiones que explican el deporte profesional y casi nunca se cuentan bien.
+        </p>
+        <p class="parrafo">
+          Preguntamos por los números, los contratos y los incentivos, con gente que los ha
+          firmado.
+        </p>
+      </div>
+    </div>
+  </section>
 
-        // La cuenta atrás nace oculta: si el JS falla, la página sigue diciendo la
-        // hora en el titular en vez de enseñar tres ceros congelados.
-        caja.hidden = false;
+  <section class="seccion">
+    <div class="envoltorio">
+      <div class="encabezado">
+        <h2 class="titular-seccion ancha">Episodios</h2>
+        <a href="/episodios" class="boton">Ver todos</a>
+      </div>
 
-        const dos = (n) => String(n).padStart(2, '0');
+      <div class="lista">
+        {episodios.map((ep) => <FilaEpisodio episodio={ep} />)}
+      </div>
+    </div>
+  </section>
 
-        function pintar() {
-          const resto = destino - Date.now();
+  <BloqueColabora />
 
-          if (resto <= 0) {
-            caja.hidden = true;
-            titular.textContent = 'Ya está fuera';
-            linea.textContent = 'Primer episodio disponible.';
-            alternativa.textContent = 'El primer episodio ya está publicado.';
-            return true;
-          }
+  <section class="seccion">
+    <div class="envoltorio">
+      <div class="encabezado">
+        <h2 class="titular-seccion ancha">Invitados</h2>
+        <a href="/invitados" class="boton">Ver todos</a>
+      </div>
 
-          const total = Math.floor(resto / 1000);
-          horas.textContent = dos(Math.floor(total / 3600));
-          minutos.textContent = dos(Math.floor(total / 60) % 60);
-          segundos.textContent = dos(total % 60);
-          return false;
+      <ul class="invitados">
+        {
+          publicados.map((inv) => (
+            <li class="invitados__fila">
+              <span class="estrecha">Ep {inv.episodio}</span>
+              <p class="titular-tarjeta">{inv.nombre}</p>
+              <p class="dato">{inv.rol}</p>
+            </li>
+          ))
         }
+      </ul>
+    </div>
+  </section>
 
-        if (!pintar()) {
-          const tic = setInterval(() => {
-            if (pintar()) clearInterval(tic);
-          }, 1000);
+  <section class="seccion seccion--alterna">
+    <div class="envoltorio">
+      <div class="encabezado">
+        <h2 class="titular-seccion ancha">Quiénes somos</h2>
+        <a href="/sobre-nosotros" class="boton">Conócenos</a>
+      </div>
+
+      <ul class="rejilla rejilla--3">
+        {
+          hosts.map((h) => (
+            <li>
+              <Retrato foto={h.foto} nombre={h.nombre} rol={h.rol} />
+              <p class="titular-tarjeta host__nombre">{h.nombre}</p>
+              {h.rol && <p class="estrecha host__rol">{h.rol}</p>}
+            </li>
+          ))
         }
-      })();
-    </script>
-  </body>
-</html>
+      </ul>
+    </div>
+  </section>
+
+  <BloqueNewsletter />
+</Base>
 
 <style>
-  .espera {
-    min-height: 100dvh;
-    display: grid;
-    place-items: center;
-    padding: var(--margen);
+  .hero {
+    padding-block: clamp(3.5rem, 11vw, 8.5rem) clamp(3rem, 8vw, 6rem);
   }
 
-  .espera__caja {
-    width: 100%;
-    max-width: 54rem;
-    text-align: center;
+  .hero__entradilla {
+    margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
   }
 
-  .espera__marca {
-    color: var(--papel-medio);
-    margin-bottom: clamp(2rem, 6vw, 3.5rem);
+  .hero__acciones {
+    margin-top: 2rem;
   }
 
-  .espera__titular {
-    font-size: clamp(2.25rem, 10vw, 6rem);
-    margin-bottom: 1.5rem;
+  .hero__plataformas {
+    margin-top: 2.25rem;
   }
 
-  /* La hora siempre en su propia línea: es el dato que la gente viene a leer. */
-  .espera__hora {
-    display: block;
+  .manifiesto {
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    max-width: 24ch;
+    margin: 0;
   }
 
-  .espera__linea {
-    color: var(--papel-medio);
-    font-size: clamp(1rem, 2.4vw, 1.25rem);
-    max-width: 34ch;
-    margin-inline: auto;
-    text-wrap: balance;
+  .manifiesto__texto {
+    margin-top: clamp(1.75rem, 4vw, 2.5rem);
   }
 
-  .cuenta {
+  .encabezado {
     display: flex;
-    justify-content: center;
-    gap: clamp(1.5rem, 6vw, 3.5rem);
-    margin-top: clamp(2.5rem, 7vw, 4rem);
-    padding-top: clamp(2.5rem, 7vw, 4rem);
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  .lista {
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .invitados__fila {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    gap: 0.15rem 1.5rem;
+    padding-block: 1.25rem;
     border-top: 1px solid var(--linea);
   }
 
-  /* `display: flex` gana al atributo `hidden` del navegador: hay que decirlo aquí
-     o al llegar a cero se quedan tres ceros colgados en pantalla. */
-  .cuenta[hidden] {
-    display: none;
+  .invitados__fila .estrecha {
+    grid-row: span 2;
+    padding-top: 0.35rem;
   }
 
-  .cuenta__par {
-    display: grid;
-    gap: 0.6rem;
+  .host__nombre {
+    margin-top: 0.9rem;
   }
 
-  .cuenta__cifra {
-    font-size: clamp(2.25rem, 9vw, 4rem);
+  .host__rol {
+    display: block;
     color: var(--azul);
+    margin-top: 0.3rem;
   }
 
-  .cuenta__unidad {
-    font-size: 0.6875rem;
-  }
-
-  .espera__cta {
-    margin-top: clamp(2.5rem, 7vw, 3.5rem);
-  }
-
-  .visualmente-oculto {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+  @media (max-width: 700px) {
+    .invitados__fila {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.15rem;
+    }
+    .invitados__fila .estrecha {
+      grid-row: auto;
+      padding-top: 0;
+      margin-bottom: 0.35rem;
+    }
   }
 </style>
