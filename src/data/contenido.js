@@ -15,8 +15,7 @@ export const episodios = [
     titulo: 'Del anonimato a WOW FC: cómo vivir de las MMA',
     invitado: 'Santi Higuera',
     contexto: 'Luchador de MMA',
-    // La duración se rellena cuando el episodio esté publicado del todo.
-    duracion: null,
+    duracion: '1 h 17 min',
     fecha: '2026-09-04',
     fechaTexto: '4 de septiembre',
     url: 'https://www.youtube.com/watch?v=-JBS4m7dXkM',
