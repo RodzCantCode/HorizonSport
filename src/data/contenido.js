@@ -1,6 +1,6 @@
 // Fuente única de contenido del sitio.
-// Los textos son provisionales pero con la voz definitiva: sustituir por los reales
-// según se publiquen episodios y lleguen los datos de marca.
+// Los episodios que aparecen aquí son los realmente publicados. Los grabados que
+// aún no han salido van en `episodiosProximos`, sin nombre ni tema.
 
 export const marca = {
   nombre: 'Horizon Sport',
@@ -12,41 +12,23 @@ export const marca = {
 export const episodios = [
   {
     numero: '01',
-    titulo: 'El negocio del boxeo y el efecto Velada',
-    invitado: 'Ramón Lord y Clara López',
-    contexto: 'Entrenador y boxeadora',
-    duracion: '48 min',
-    fecha: '2026-08-06',
-    fechaTexto: '6 de agosto',
-    resumen:
-      'Ramón Lord entrena boxeo desde hace años, formado en la escuela cubana. Clara López apunta a campeona de España en su peso. Con los dos repasamos el estado del boxeo, entramos en el debate de la Velada de Ibai y hablamos de cómo se sostiene económicamente el deporte por debajo de las grandes veladas.',
-  },
-  {
-    numero: '02',
-    titulo: 'Vivir de las MMA en España',
+    titulo: 'Del anonimato a WOW FC: cómo vivir de las MMA',
     invitado: 'Santi Higuera',
     contexto: 'Luchador de MMA',
-    duracion: '52 min',
-    fecha: '2026-08-13',
-    fechaTexto: '13 de agosto',
+    // La duración se rellena cuando el episodio esté publicado del todo.
+    duracion: null,
+    fecha: '2026-09-04',
+    fechaTexto: '4 de septiembre',
+    url: 'https://www.youtube.com/watch?v=-JBS4m7dXkM',
     resumen:
-      'Qué hay detrás de una carrera en artes marciales mixtas: de dónde sale el dinero, qué pesa más entre el resultado y la repercusión, y cómo se gestiona la exposición pública. Hablamos también, sin rodeos, de su pelea contra Leo Climent.',
-  },
-  {
-    numero: '03',
-    titulo: 'El negocio detrás de unos guantes de boxeo',
-    invitado: 'Javi Echaleku',
-    contexto: 'Marca de guantes y accesorios',
-    duracion: '45 min',
-    fecha: '2026-08-19',
-    fechaTexto: '19 de agosto',
-    resumen:
-      'Montar una marca de material deportivo desde dentro del propio deporte: producción, márgenes, distribución y qué papel juegan los deportistas que lo llevan puesto. El negocio de la ropa y los accesorios, contado por quien fabrica.',
+      'Santi Higuera cuenta cómo está construyendo su carrera en las MMA, desde sus primeras peleas hasta competir en organizaciones como WAR y WOW FC. Su evolución como luchador, la polémica pelea con Leo Climent, el peso que tiene la fe y todo lo que hay detrás de intentar vivir de esto: dinero, marca personal, oportunidades y negocio.',
   },
 ];
 
 // Grabados y pendientes de edición: se anuncian cuando hay fecha.
 export const episodiosProximos = [
+  { numero: '02', pista: 'Por anunciar' },
+  { numero: '03', pista: 'Por anunciar' },
   { numero: '04', pista: 'Por anunciar' },
   { numero: '05', pista: 'Por anunciar' },
   { numero: '06', pista: 'Por anunciar' },
@@ -75,19 +57,20 @@ export const hosts = [
 ];
 
 export const invitados = [
-  { nombre: 'Ramón Lord', rol: 'Entrenador de boxeo', episodio: '01', publicado: true },
-  { nombre: 'Clara López', rol: 'Boxeadora', episodio: '01', publicado: true },
-  { nombre: 'Santi Higuera', rol: 'Luchador de MMA', episodio: '02', publicado: true },
-  { nombre: 'Javi Echaleku', rol: 'Marca de guantes y accesorios', episodio: '03', publicado: true },
+  { nombre: 'Santi Higuera', rol: 'Luchador de MMA', episodio: '01', publicado: true },
+  { nombre: null, rol: null, episodio: '02', publicado: false },
+  { nombre: null, rol: null, episodio: '03', publicado: false },
   { nombre: null, rol: null, episodio: '04', publicado: false },
   { nombre: null, rol: null, episodio: '05', publicado: false },
   { nombre: null, rol: null, episodio: '06', publicado: false },
 ];
 
+// Solo se pintan las que tienen URL: un enlace que no lleva a ninguna parte es
+// peor que no enseñar la plataforma.
 export const plataformas = [
-  { nombre: 'Spotify', url: '#' },
-  { nombre: 'YouTube', url: '#' },
-  { nombre: 'Apple Podcasts', url: '#' },
+  { nombre: 'YouTube', url: 'https://www.youtube.com/@HorizonSportPODCAST' },
+  { nombre: 'Spotify', url: null },
+  { nombre: 'Apple Podcasts', url: null },
 ];
 
 export const navegacion = [

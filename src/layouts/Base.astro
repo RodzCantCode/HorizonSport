@@ -4,12 +4,21 @@ import Nav from '../components/Nav.astro';
 import Pie from '../components/Pie.astro';
 import { marca } from '../data/contenido.js';
 
-const { titulo, descripcion = marca.descripcion, activo = '' } = Astro.props;
+const {
+  titulo,
+  descripcion = marca.descripcion,
+  activo = '',
+  imagenSocial = '/og-estreno.jpg',
+} = Astro.props;
 const tituloCompleto = titulo ? `${titulo} · ${marca.nombre}` : `${marca.nombre} — ${marca.claim}`;
 
 // Canónica siempre contra el dominio de producción, también desde los preview:
 // así los buscadores no indexan las URLs temporales de Vercel.
 const canonica = new URL(Astro.url.pathname, Astro.site).href;
+
+// Imagen por defecto al compartir el enlace. Sin ella, WhatsApp y LinkedIn
+// enseñan la tarjeta sin miniatura.
+const imagen = new URL(imagenSocial, Astro.site).href;
 ---
 
 <!doctype html>
@@ -28,8 +37,12 @@ const canonica = new URL(Astro.url.pathname, Astro.site).href;
     <meta property="og:site_name" content={marca.nombre} />
     <meta property="og:title" content={tituloCompleto} />
     <meta property="og:description" content={descripcion} />
+    <meta property="og:image" content={imagen} />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="720" />
     <meta property="og:locale" content="es_ES" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={imagen} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

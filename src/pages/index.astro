@@ -7,6 +7,7 @@ import Retrato from '../components/Retrato.astro';
 import { episodios, hosts, invitados, plataformas } from '../data/contenido.js';
 
 const publicados = invitados.filter((i) => i.publicado);
+const disponibles = plataformas.filter((p) => p.url);
 ---
 
 <Base activo="/">
@@ -25,9 +26,9 @@ const publicados = invitados.filter((i) => i.publicado);
       </div>
 
       <p class="dato hero__plataformas">
-        {plataformas.map((p, i) => (
+        {disponibles.map((p, i) => (
           <>
-            <a class="enlace" href={p.url}>{p.nombre}</a>{i < plataformas.length - 1 ? '   ·   ' : ''}
+            <a class="enlace" href={p.url}>{p.nombre}</a>{i < disponibles.length - 1 ? '   ·   ' : ''}
           </>
         ))}
       </p>

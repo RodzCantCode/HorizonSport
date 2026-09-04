@@ -1,5 +1,9 @@
 ---
 const { episodio, resumen = false } = Astro.props;
+
+// La duración no se conoce hasta que el episodio está publicado del todo, así que
+// se omite en lugar de inventarla.
+const extras = [episodio.duracion].filter(Boolean);
 ---
 
 <article class="episodio">
@@ -10,13 +14,17 @@ const { episodio, resumen = false } = Astro.props;
       <span class="solo-lectores">Episodio {episodio.numero}: </span>{episodio.titulo}
     </h3>
     <p class="dato episodio__meta">
-      {episodio.invitado} · {episodio.contexto} · <time datetime={episodio.fecha}>{episodio.fechaTexto}</time> · {episodio.duracion}
+      {episodio.invitado} · {episodio.contexto} · <time datetime={episodio.fecha}>{episodio.fechaTexto}</time>{extras.map((e) => <>{' · '}{e}</>)}
     </p>
     {resumen && <p class="parrafo episodio__resumen">{episodio.resumen}</p>}
   </div>
 
   <div>
-    <a href="#" class="boton">Escuchar</a>
+    {episodio.url && (
+      <a href={episodio.url} class="boton" rel="noopener">
+        Ver el episodio
+      </a>
+    )}
   </div>
 </article>
 

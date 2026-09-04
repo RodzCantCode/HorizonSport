@@ -1,6 +1,7 @@
 ---
 import { navegacion, plataformas } from '../data/contenido.js';
 const anio = new Date().getFullYear();
+const disponibles = plataformas.filter((p) => p.url);
 ---
 
 <footer class="pie">
@@ -25,7 +26,7 @@ const anio = new Date().getFullYear();
         <h2 class="pie__titulo" id="pie-plataformas">Escúchanos</h2>
         <ul class="pie__lista">
           {
-            plataformas.map((p) => (
+            disponibles.map((p) => (
               <li>
                 <a class="pie__enlace" href={p.url}>
                   {p.nombre}
