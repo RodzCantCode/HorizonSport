@@ -33,11 +33,34 @@ No hace falta subir archivos a mano: basta con `git push`.
 El dominio de producción es `horizonsport.co` y está declarado en `astro.config.mjs`
 (`site`), de donde salen las URLs canónicas y las etiquetas Open Graph.
 
+## 🔒 Portada de espera activa (4 de septiembre de 2026)
+
+Ahora mismo el sitio **solo sirve la portada de espera** con la cuenta atrás al estreno de
+las 19:00. Dos piezas la sostienen:
+
+- `src/pages/` contiene **únicamente** `index.astro` (la portada de espera). Las páginas reales
+  están aparcadas en `src/paginas-en-espera/`, fuera del enrutado de Astro, así que no se
+  construyen ni se despliegan.
+- `vercel.json` reescribe **cualquier ruta** a `/`. Quien escriba `/episodios` o `/colabora` a
+  mano ve la portada de espera, no un 404. Los archivos estáticos (fotos, CSS) no se ven
+  afectados: en Vercel las reescrituras solo actúan cuando no hay fichero que sirva.
+
+**Para devolver la web completa:** revertir el commit que puso la portada, o a mano:
+
+```bash
+git rm vercel.json
+rm -r src/pages
+git mv src/paginas-en-espera src/pages
+```
+
+La hora del estreno vive en una sola constante (`ESTRENO`) al principio de `src/pages/index.astro`.
+Lleva zona horaria explícita (`+02:00`), así que la cuenta atrás sale bien desde cualquier país.
+
 ## Pendiente antes de publicar
 
-- [ ] **Imagen Open Graph.** No hay `og:image`, así que al compartir el enlace por
-      WhatsApp o LinkedIn sale sin miniatura. Hace falta un PNG de 1200×630 en
-      `public/` y una etiqueta más en `Base.astro`.
+- [ ] **Imagen Open Graph del sitio.** La portada de espera ya tiene la suya
+      (`public/og-estreno.jpg`, la miniatura del estreno), pero `Base.astro` —el resto
+      de páginas— sigue sin `og:image`.
 
 - [x] ~~Fotos de los hosts.~~ Hechas: los originales (PNG de ~20 MB) se redujeron a WebP de ~50 KB
       en dos tamaños (`-900` y `-450`, servidos con `srcset`). Para añadir o cambiar una, deja el
