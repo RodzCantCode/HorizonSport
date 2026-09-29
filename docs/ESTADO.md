@@ -11,7 +11,7 @@ a ningún sitio.
 
 | Dónde | Estado a 29-sep-2026 |
 | --- | --- |
-| https://www.horizonsport.co | Sitio completo, commit `cc33a50` (4-sep). `main` y `preview` apuntan al mismo commit. |
+| https://www.horizonsport.co | Sitio completo. Último cambio de contenido: 4-sep (`cc33a50`). `main` y `preview` están en el mismo commit. |
 | YouTube [@HorizonSportPODCAST](https://www.youtube.com/@HorizonSportPODCAST) | 4 episodios largos + shorts de cada uno (42 vídeos, 30 suscriptores). |
 | Instagram y TikTok | `@horizonsportpodcast`. Todavía no están enlazados desde la web. |
 
