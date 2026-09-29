@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horizon Sport — Wireframes</title>
+<style>
+  :root{
+    --bg:#0B0E12;            /* page base */
+    --bg-alt:#10151B;        /* alternating sections */
+    --surface:#141A21;       /* cards */
+    --surface-2:#1B232C;     /* nested cards / inputs */
+    --border:#243038;        /* hairline */
+    --border-soft:#1A222A;
+    --text:#EAF1F6;
+    --text-dim:#9AA6B2;
+    --text-faint:#5E6B76;
+    --accent:#169EFF;
+    --accent-ink:#04121E;    /* dark text on blue */
+    --accent-soft:rgba(22,158,255,.14);
+    --accent-line:rgba(22,158,255,.40);
+    --bar:#2A343E;
+    --bar-2:#37434E;
+    --img:#1A222B;
+    --note:#E7B85C;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#06090C;color:var(--text)}
+  /* ---------- Tool control bar ---------- */
+  .toolbar{position:sticky;top:0;z-index:50;background:#0A0D11;color:#fff;padding:12px 20px;border-bottom:1px solid var(--border);box-shadow:0 2px 16px rgba(0,0,0,.45)}
+  .toolbar .row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .toolbar .brand{font-weight:800;letter-spacing:.04em;font-size:14px}
+  .toolbar .brand small{font-weight:500;color:var(--text-dim);letter-spacing:0}
+  .seg{display:inline-flex;background:#12171D;border:1px solid var(--border);border-radius:9px;padding:3px;gap:2px}
+  .seg button{background:transparent;border:0;color:var(--text-dim);padding:7px 12px;border-radius:7px;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+  .seg button:hover{color:#fff}
+  .seg button.on{background:var(--accent);color:var(--accent-ink)}
+  .seg.variants button.on{background:var(--accent);color:var(--accent-ink)}
+  .toolbar .label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-faint);font-weight:700}
+  .vdesc{margin-top:10px;font-size:12.5px;color:var(--text-dim);max-width:880px;line-height:1.5}
+  .vdesc b{color:var(--text)}
+  .vdesc i{color:var(--accent);font-style:normal}
+  /* ---------- Viewport (the fake browser page) ---------- */
+  .stage{padding:26px 16px 60px;display:flex;justify-content:center}
+  .viewport{width:100%;max-width:1080px;background:var(--bg);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+  /* ---------- Wireframe primitives ---------- */
+  .bar{height:11px;background:var(--bar);border-radius:5px;margin:0 0 9px}
+  .bar.sm{height:8px}
+  .bar.dark{background:var(--bar-2)}
+  .wf-img{background:var(--img);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;border-radius:8px;text-align:center;padding:6px}
+  .wf-circle{border-radius:50%}
+  .wf-tag{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:800}
+  .wf-btn{display:inline-flex;align-items:center;gap:7px;padding:11px 18px;border-radius:9px;font-size:13px;font-weight:700;border:1.5px solid var(--border);color:var(--text);background:transparent}
+  .wf-btn.solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  .wf-btn.ghost{border-color:transparent;color:var(--text-dim);padding-left:4px;padding-right:4px}
+  .wf-btn.sm{padding:8px 13px;font-size:12px}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1.5px solid var(--border);border-radius:999px;font-size:12px;font-weight:700;color:var(--text-dim);background:var(--surface-2)}
+  .pill{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:11px;font-weight:700}
+  h1.hl{font-size:38px;line-height:1.08;margin:0;color:var(--text);font-weight:800;letter-spacing:-.02em}
+  h1.hl.serif{font-family:Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:0}
+  .sec-title{font-size:23px;font-weight:800;color:var(--text);margin:0 0 3px;letter-spacing:-.01em}
+  .sec-title.serif{font-family:Georgia,serif;font-weight:700}
+  .lead{font-size:15px;color:var(--text-dim);line-height:1.55;margin:6px 0 0}
+  /* layout helpers */
+  .wf-sec{padding:38px 44px;border-bottom:1px solid var(--border-soft)}
+  .wf-sec.tight{padding:26px 44px}
+  .note{margin:0 0 20px;font-size:12px;color:var(--note);background:rgba(231,184,92,.08);border-left:3px solid var(--note);padding:7px 11px;border-radius:0 5px 5px 0;line-height:1.45}
+  .note b{color:#F2CE86}
+  .grid{display:grid;gap:18px}
+  .card{border:1px solid var(--border);border-radius:12px;padding:18px;background:var(--surface)}
+  .card.pad-lg{padding:22px}
+  .band{background:linear-gradient(180deg,#101C27,#0C141C);border:1px solid var(--accent-line);border-radius:14px;padding:34px;box-shadow:0 20px 40px rgba(0,0,0,.35)}
+  .band .wf-tag{color:var(--accent)}
+  .band .bar{background:#2B3A47}
+  .band .wf-btn{border-color:var(--border);color:var(--text)}
+  .band .wf-btn.solid{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  .muted{color:var(--text-dim)}
+  .center{text-align:center}
+  /* site nav inside viewport */
+  .snav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 44px;border-bottom:1px solid var(--border-soft);flex-wrap:wrap}
+  .snav .logo{font-weight:900;letter-spacing:.02em;font-size:16px;color:var(--text)}
+  .snav .logo .dot{color:var(--accent)}
+  .snav .links{display:flex;gap:20px;font-size:13.5px;color:var(--text-dim);font-weight:600;flex-wrap:wrap}
+  .snav .links span{cursor:default;padding-bottom:2px}
+  .snav .links span.active{color:var(--text);border-bottom:2px solid var(--accent)}
+  .snav .right{display:flex;align-items:center;gap:10px}
+  .platicons{display:flex;gap:6px}
+  .platicons .pi{width:30px;height:30px;border-radius:7px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--text-dim)}
+  /* footer */
+  .sfoot{background:#070A0D;border-top:1px solid var(--border);color:var(--text-dim);padding:34px 44px}
+  .sfoot .cols{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:26px}
+  .sfoot h5{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--text-faint);margin:0 0 12px}
+  .sfoot .bar{background:#1C262F}
+  .sfoot .logo{font-weight:900;color:#fff;font-size:16px;margin-bottom:10px}
+  .legend{max-width:1080px;margin:0 auto;padding:14px 18px;color:var(--text-faint);font-size:12px;text-align:center}
+  .hero-2col{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center}
+  .row-flex{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  @media(max-width:760px){.hero-2col{grid-template-columns:1fr}.sfoot .cols{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="row">
+      <div class="brand">HORIZON&nbsp;SPORT <small>· wireframes</small></div>
+      <span class="label">Variante</span>
+      <div class="seg variants" id="vseg"></div>
+      <span class="label">Página</span>
+      <div class="seg" id="pseg"></div>
+    </div>
+    <div class="vdesc" id="vdesc"></div>
+  </div>
+  <div class="stage"><div class="viewport" id="vp"></div></div>
+  <div class="legend">Modo oscuro por defecto · paleta negro/blanco + azul <b style="color:var(--accent)">#169EFF</b> · logo provisional · las notas <span style="color:var(--note)">ámbar</span> explican la intención de cada bloque.</div>
+
+<script>
+/* ============================ DATA ============================ */
+const EPISODES = [
+  ['01','Cómo se construye la marca de un club','Dir. de Marketing · club de 1ª división','48 min'],
+  ['02','El negocio detrás de un fichaje','Agente deportivo FIFA','52 min'],
+  ['03','Patrocinios que sí funcionan','Dir. Comercial · marca deportiva','45 min'],
+];
+const SOON = ['04','05','06'];
+const GUESTS = [
+  ['Dir. de Marketing','Club 1ª división'],
+  ['Agente deportivo','Representación'],
+  ['Dir. Comercial','Marca deportiva'],
+  ['Directora de Patrocinios','Competición'],
+];
+const HOSTS = [['Host 1','Co-fundador · perfil deporte'],['Host 2','Co-fundador · perfil negocio'],['Host 3','Co-fundador · perfil medios']];
+
+/* ============================ PRIMITIVES ============================ */
+const bar=(w,cls='')=>`<div class="bar ${cls}" style="width:${w}"></div>`;
+const bars=(arr,cls='')=>arr.map(w=>bar(w,cls)).join('');
+const para=(lines=3)=>bars(Array.from({length:lines},(_,i)=>i===lines-1?'70%':'100%'),'sm');
+const img=(label,h='160px',cls='')=>`<div class="wf-img ${cls}" style="height:${h}">${label}</div>`;
+const btn=(t,cls='solid')=>`<span class="wf-btn ${cls}">${t}</span>`;
+const tag=t=>`<span class="wf-tag">${t}</span>`;
+const note=t=>`<p class="note">↳ <b>Intención:</b> ${t}</p>`;
+const platicons=()=>`<div class="platicons"><div class="pi">SPO</div><div class="pi">YT</div><div class="pi">APL</div></div>`;
+
+/* ============================ NAV + FOOTER ============================ */
+function nav(v,page){
+  const L=(id,txt)=>`<span class="${page===id?'active':''}">${txt}</span>`;
+  const links=`<div class="links">${L('episodios','Episodios')}${L('invitados','Invitados')}${L('sobre','Sobre nosotros')}${L('newsletter','Newsletter')}</div>`;
+  let right='';
+  if(v==='A') right=`<div class="right">${btn('Colabora','')}</div>`;
+  if(v==='B') right=`<div class="right">${platicons()}${btn('Suscríbete','solid sm')}</div>`;
+  if(v==='C') right=`<div class="right">${btn('Quiero colaborar','solid sm')}</div>`;
+  return `<div class="snav"><div class="logo">HORIZON<span class="dot">.</span>SPORT</div>${links}${right}</div>`;
+}
+function footer(v){
+  const big = v==='B' ? `<div class="row-flex" style="margin-top:14px">${btn('▶ Spotify','solid sm')}${btn('▶ YouTube','sm')}${btn('▶ Apple','sm')}</div>` : '';
+  return `<div class="sfoot"><div class="cols">
+    <div><div class="logo">HORIZON.SPORT</div>${bar('80%')}${bar('55%','sm')}${big}</div>
+    <div><h5>Secciones</h5>${bars(['60%','70%','50%','65%'],'sm')}</div>
+    <div><h5>Plataformas</h5>${bars(['55%','60%','50%'],'sm')}</div>
+    <div><h5>Newsletter</h5>${bar('90%','sm')}<div class="row-flex" style="margin-top:8px"><div class="wf-img" style="height:34px;flex:1">email</div>${btn('OK','solid sm')}</div><div style="margin-top:10px" class="muted" >Privacidad · Cookies · © Horizon Sport</div></div>
+  </div></div>`;
+}
+
+/* ============================ HOME — VARIANT A (Editorial) ============================ */
+function homeA(){return `
+<div class="wf-sec">
+  ${note('Hero editorial = autoridad desde el segundo cero. Titular grande con la propuesta de valor; CTA primario newsletter (fidelización) + escuchar. A la derecha, un episodio “de portada”.')}
+  <div class="hero-2col">
+    <div>
+      ${tag('Podcast · El negocio del deporte')}
+      <h1 class="hl serif" style="margin-top:12px">Donde el deporte<br>se entiende como negocio.</h1>
+      <p class="lead">Conversaciones con quienes mueven la industria: directivos, agentes, marcas y profesionales. Análisis en profundidad de la parte que nadie cuenta.</p>
+      <div class="row-flex" style="margin-top:20px">${btn('Suscríbete a la newsletter')}${btn('Escúchanos','')}</div>
+    </div>
+    <div>${img('Episodio destacado · portada','230px')}<div style="margin-top:10px">${bar('85%')}${bar('50%','sm')}</div></div>
+  </div>
+</div>
+
+<div class="wf-sec" style="background:var(--bg-alt)">
+  ${note('“El porqué”: manifiesto a modo de carta editorial. Aquí se afila el diferenciador frente a la competencia (foco exclusivo en el lado de negocio).')}
+  ${tag('Nuestro enfoque')}
+  <h2 class="sec-title serif" style="margin-top:8px;max-width:760px;font-size:26px;line-height:1.3">“Todo el mundo habla de lo que pasa en el campo. Nosotros hablamos de lo que pasa en los despachos.”</h2>
+  <div style="max-width:720px;margin-top:14px">${para(3)}</div>
+</div>
+
+<div class="wf-sec">
+  ${note('Últimos episodios en formato lista editorial (tipo artículo), no rejilla. Prioriza el titular y el invitado, no la portada.')}
+  <h2 class="sec-title">Últimos episodios</h2>
+  <div style="margin-top:18px">${EPISODES.map(e=>`
+    <div style="display:grid;grid-template-columns:54px 1fr auto;gap:18px;align-items:center;padding:16px 0;border-top:1px solid #efeff3">
+      <div class="pill" style="justify-self:start">EP ${e[0]}</div>
+      <div>${bar('70%')}<div class="muted" style="font-size:12.5px;margin-top:2px">${e[1]} · ${e[2]}</div></div>
+      <div class="row-flex">${btn('▶ Escuchar','solid sm')}${btn('Leer notas','sm')}</div>
+    </div>`).join('')}
+  </div>
+</div>
+
+<div class="wf-sec" style="background:var(--bg-alt)">
+  ${note('Invitados destacados como prueba social = credibilidad para atraer nuevos invitados/patrocinadores.')}
+  <h2 class="sec-title">Han pasado por el micro</h2>
+  <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:18px">
+    ${GUESTS.map(g=>`<div class="center">${img('FOTO','110px','wf-circle')}<div style="margin-top:10px">${bar('80%','sm')}</div><div class="muted" style="font-size:11.5px">${g[0]}</div></div>`).join('')}
+  </div>
+</div>
+
+<div class="wf-sec">
+  <div class="hero-2col">
+    <div>${tag('Quiénes somos')}<h2 class="sec-title serif" style="margin-top:6px">Tres voces, un mismo foco</h2><div style="margin-top:12px">${para(3)}</div><div style="margin-top:14px">${btn('Conócenos','')}</div></div>
+    <div class="row-flex">${HOSTS.map(()=>img('FOTO','90px','wf-circle')+'').join('')}</div>
+  </div>
+</div>
+
+<div class="wf-sec">
+  ${note('OBJETIVO Nº1: banda “Colabora”. Dos caminos (invitado / patrocinador) + descarga del Media Kit. Lleva a la página dedicada.')}
+  <div class="band">
+    ${tag('Participa')}
+    <h2 style="font-family:Georgia,serif;font-size:25px;margin:8px 0 6px;color:#fff">¿Quieres formar parte del podcast?</h2>
+    <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:18px;gap:16px">
+      <div>${bar('60%','')}<div style="opacity:.7;font-size:13px;margin:2px 0 12px">Comparte tu experiencia ante una audiencia cualificada del sector.</div>${btn('Quiero ser invitado','solid')}</div>
+      <div>${bar('60%','')}<div style="opacity:.7;font-size:13px;margin:2px 0 12px">Conecta tu marca con los decisores del negocio del deporte.</div>${btn('Quiero patrocinar','solid')}</div>
+    </div>
+    <div style="margin-top:18px">${btn('⤓ Descargar Media Kit (PDF)','')}</div>
+  </div>
+</div>
+
+<div class="wf-sec center" style="background:var(--bg-alt)">
+  ${tag('Newsletter')}
+  <h2 class="sec-title serif" style="margin-top:6px">El análisis del negocio del deporte, cada semana en tu correo</h2>
+  <div class="row-flex" style="justify-content:center;margin-top:16px"><div class="wf-img" style="height:44px;width:320px">tu@email.com</div>${btn('Suscribirme')}</div>
+</div>`;}
+
+/* ============================ HOME — VARIANT B (Show / Podcast-first) ============================ */
+function homeB(){return `
+<div class="wf-sec" style="background:radial-gradient(120% 95% at 88% -10%, rgba(22,158,255,.18), transparent 55%), var(--bg-alt)">
+  ${note('Hero “show”: el audio manda. Título enorme + reproductor del último episodio destacado + botones de plataforma. Energía de marca de podcast.')}
+  <div class="hero-2col">
+    <div>
+      <span class="pill" style="background:var(--surface-2);color:var(--text-dim)">▶ Nuevo episodio cada semana</span>
+      <h1 class="hl" style="color:#fff;margin-top:14px;font-size:44px">HORIZON<br>SPORT</h1>
+      <p class="lead" style="color:var(--text-dim)">El podcast del negocio del deporte. Sin rodeos, con quienes lo viven desde dentro.</p>
+      <div class="row-flex" style="margin-top:20px">${btn('▶ Escuchar último episodio','solid')}<span class="chip" style="background:var(--surface-2);border-color:var(--border);color:var(--text-dim)">Spotify</span><span class="chip" style="background:var(--surface-2);border-color:var(--border);color:var(--text-dim)">YouTube</span><span class="chip" style="background:var(--surface-2);border-color:var(--border);color:var(--text-dim)">Apple</span></div>
+    </div>
+    <div class="card" style="background:var(--surface);border-color:var(--border)">
+      <div class="wf-img" style="height:120px;background:var(--img);border-color:var(--border);color:var(--text-faint)">PORTADA EPISODIO</div>
+      <div style="margin-top:12px">${bar('80%','dark')}${bar('50%','sm dark')}</div>
+      <div class="wf-img" style="height:34px;margin-top:12px;background:var(--img);border-color:var(--border);color:var(--text-faint)">▶ ▮▮▯▯▯▯▯ waveform 00:00 / 48:12</div>
+    </div>
+  </div>
+</div>
+
+<div class="wf-sec">
+  ${note('Episodios en REJILLA visual con portadas (lo opuesto a la lista editorial de A). Invita a explorar y dar a play.')}
+  <div class="row-flex" style="justify-content:space-between"><h2 class="sec-title">Episodios</h2>${btn('Ver todos','sm')}</div>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:18px">
+    ${EPISODES.concat(SOON.map(n=>[n,'Próximamente','',''])).map(e=>`
+      <div class="card" style="padding:0;overflow:hidden">
+        ${img(e[1]==='Próximamente'?'PRÓXIMAMENTE':'PORTADA','140px').replace('border-radius:8px','border-radius:0')}
+        <div style="padding:14px">${bar('85%')}<div class="muted" style="font-size:12px">${e[1]==='Próximamente'?'En camino · Ep '+e[0]:e[2]+' · '+e[3]}</div></div>
+      </div>`).join('')}
+  </div>
+</div>
+
+<div class="wf-sec" style="background:var(--bg-alt)">
+  ${note('Invitados en carrusel con foto grande. Refuerza el “quién” de cada episodio.')}
+  <h2 class="sec-title">Invitados</h2>
+  <div class="row-flex" style="margin-top:18px;flex-wrap:nowrap;overflow:hidden">
+    ${GUESTS.concat([['','Próximamente']]).map(g=>`<div class="card center" style="min-width:170px">${img(g[0]?'FOTO':'PRÓX.','120px')}<div style="margin-top:8px">${bar('80%','sm')}</div><div class="muted" style="font-size:11px">${g[0]||'Nuevo invitado'}</div></div>`).join('')}
+  </div>
+</div>
+
+<div class="wf-sec center">
+  ${note('“El porqué” en versión punchy, a una frase. Mismo mensaje que A pero con tono de show.')}
+  ${tag('Por qué Horizon Sport')}
+  <h2 class="sec-title" style="margin-top:8px;font-size:28px;max-width:720px;margin-left:auto;margin-right:auto">Nadie más entra a fondo en el lado de <u>negocio</u> del deporte. Nosotros sí.</h2>
+</div>
+
+<div class="wf-sec" style="background:var(--bg-alt)">
+  <h2 class="sec-title">Los hosts</h2>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:18px">
+    ${HOSTS.map(h=>`<div class="card center">${img('FOTO','150px')}<div style="margin-top:10px">${bar('70%')}</div><div class="muted" style="font-size:12px">${h[1]}</div></div>`).join('')}
+  </div>
+</div>
+
+<div class="wf-sec">
+  ${note('OBJETIVO Nº1: Colabora como dos tarjetas grandes y visuales + Media Kit.')}
+  <h2 class="sec-title">Colabora con nosotros</h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:18px">
+    <div class="card pad-lg">${tag('Para profesionales')}<div style="margin:8px 0">${bar('60%')}</div>${para(2)}<div style="margin-top:14px">${btn('Quiero ser invitado','solid')}</div></div>
+    <div class="card pad-lg">${tag('Para marcas')}<div style="margin:8px 0">${bar('60%')}</div>${para(2)}<div class="row-flex" style="margin-top:14px">${btn('Quiero patrocinar','solid')}${btn('⤓ Media Kit','sm')}</div></div>
+  </div>
+</div>
+
+<div class="wf-sec center band" style="margin:24px 44px;border-radius:14px">
+  ${tag('Newsletter')}<h2 style="color:#fff;font-size:24px;margin:8px 0">No te pierdas ningún episodio</h2>
+  <div class="row-flex" style="justify-content:center;margin-top:8px"><div class="wf-img" style="height:44px;width:300px;background:var(--surface-2);border-color:var(--border)">tu@email.com</div>${btn('Suscribirme','solid')}</div>
+</div>`;}
+
+/* ============================ HOME — VARIANT C (Conversión / Negocio) ============================ */
+function homeC(){return `
+<div class="wf-sec">
+  ${note('Hero orientado a CONVERSIÓN. El objetivo nº1 (invitados/patrocinadores) aparece de inmediato como doble camino, junto a un “Escúchanos” secundario.')}
+  ${tag('Podcast B2B · Negocio del deporte')}
+  <h1 class="hl" style="margin-top:12px;max-width:780px">La industria del deporte, contada por quienes la dirigen.</h1>
+  <p class="lead" style="max-width:680px">El espacio de referencia para profesionales del negocio del deporte. Si trabajas en el sector —o quieres llegar a quienes lo hacen— este es tu sitio.</p>
+  <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:22px;gap:16px">
+    <div class="card pad-lg" style="border:1.5px solid var(--accent-line)">${tag('Profesionales')}<h3 style="margin:6px 0 4px;font-size:17px">¿Quieres ser invitado?</h3><div class="muted" style="font-size:13px">Comparte tu visión ante una audiencia cualificada.</div><div style="margin-top:14px">${btn('Postular como invitado','solid sm')}</div></div>
+    <div class="card pad-lg" style="border:1.5px solid var(--accent-line)">${tag('Marcas')}<h3 style="margin:6px 0 4px;font-size:17px">¿Quieres patrocinar?</h3><div class="muted" style="font-size:13px">Llega a los decisores del sector.</div><div class="row-flex" style="margin-top:14px">${btn('Ver oportunidades','solid sm')}${btn('⤓ Media Kit','sm')}</div></div>
+  </div>
+  <div class="row-flex" style="margin-top:16px">${btn('▶ O escúchanos primero','ghost')}</div>
+</div>
+
+<div class="wf-sec tight" style="background:var(--bg-alt)">
+  ${note('Barra de credibilidad: logos/roles de invitados ya confirmados. Genera confianza antes de pedir nada.')}
+  <div class="center muted" style="font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:14px">Ya han confiado en nosotros</div>
+  <div class="row-flex" style="justify-content:space-between">${GUESTS.map(()=>`<div class="wf-img" style="height:40px;width:140px">LOGO</div>`).join('')}</div>
+</div>
+
+<div class="wf-sec">
+  ${note('“El porqué” como propuesta de valor con 3 razones concretas. Argumenta el nicho de negocio.')}
+  ${tag('Nuestro enfoque')}<h2 class="sec-title" style="margin-top:6px">Por qué el negocio del deporte</h2>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:18px">
+    ${['Foco exclusivo','Invitados que deciden','Análisis accionable'].map(t=>`<div class="card"><div class="pill">●</div><h3 style="margin:10px 0 6px;font-size:16px">${t}</h3>${para(2)}</div>`).join('')}
+  </div>
+</div>
+
+<div class="wf-sec">
+  ${note('Colabora AMPLIADO y colocado arriba (centro de gravedad de la página). Pestañas Invitado/Patrocinador + Media Kit destacado.')}
+  <div class="band">
+    <div class="row-flex" style="justify-content:space-between;align-items:flex-start">
+      <div><span class="wf-tag">Colabora</span><h2 style="color:#fff;font-size:24px;margin:8px 0">Pon tu marca o tu voz en Horizon Sport</h2></div>
+      ${btn('⤓ Descargar Media Kit (PDF)','solid')}
+    </div>
+    <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:18px;gap:16px">
+      <div class="card" style="background:var(--surface-2);border-color:var(--border)">${tag('Ser invitado')}<div style="margin-top:10px">${bars(['90%','80%','85%'],'sm')}</div><div style="margin-top:12px">${btn('Postular','solid sm')}</div></div>
+      <div class="card" style="background:var(--surface-2);border-color:var(--border)">${tag('Patrocinar')}<div style="margin-top:10px">${bars(['90%','80%','85%'],'sm')}</div><div style="margin-top:12px">${btn('Contactar','solid sm')}</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wf-sec" style="background:var(--bg-alt)">
+  <div class="row-flex" style="justify-content:space-between"><h2 class="sec-title">Invitados</h2>${btn('Ver todos','sm')}</div>
+  <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:16px">${GUESTS.map(g=>`<div class="card center">${img('FOTO','100px','wf-circle')}<div style="margin-top:8px">${bar('80%','sm')}</div><div class="muted" style="font-size:11px">${g[0]}</div></div>`).join('')}</div>
+</div>
+
+<div class="wf-sec">
+  ${note('Episodios en formato compacto: presentes, pero secundarios respecto a la conversión.')}
+  <h2 class="sec-title">Episodios recientes</h2>
+  <div style="margin-top:14px">${EPISODES.map(e=>`<div class="row-flex" style="justify-content:space-between;padding:12px 0;border-top:1px solid #efeff3"><div>${bar('260px','sm')}<span class="muted" style="font-size:12px">EP ${e[0]} · ${e[1]}</span></div>${btn('▶','sm')}</div>`).join('')}</div>
+</div>
+
+<div class="wf-sec center" style="background:var(--bg-alt)">
+  ${tag('Newsletter')}<h2 class="sec-title" style="margin-top:6px">Suma la newsletter a tu rutina profesional</h2>
+  <div class="row-flex" style="justify-content:center;margin-top:14px"><div class="wf-img" style="height:44px;width:300px">email profesional</div>${btn('Suscribirme')}</div>
+</div>`;}
+
+/* ============================ INNER PAGES (variant-aware) ============================ */
+function episodios(v){
+  const head=`<div class="wf-sec"><h1 class="hl ${v==='A'?'serif':''}" style="font-size:30px">Episodios</h1><p class="lead">Todos los episodios del podcast. ${v==='C'?'¿Tienes algo que aportar? <b>Postula como invitado.</b>':''}</p>${note('Catálogo completo. Crece con cada publicación. '+(v==='B'?'Variante B: rejilla con portadas.':v==='C'?'Variante C: lista compacta + CTA lateral a colaborar.':'Variante A: lista editorial con notas de cada episodio.'))}</div>`;
+  if(v==='B'){
+    return head+`<div class="wf-sec"><div class="row-flex" style="margin-bottom:16px">${['Todos','Marketing','Patrocinio','Gestión'].map(t=>`<span class="chip">${t}</span>`).join('')}</div><div class="grid" style="grid-template-columns:repeat(3,1fr)">${EPISODES.concat(SOON.map(n=>[n,'Próximamente','',''])).map(e=>`<div class="card" style="padding:0;overflow:hidden">${img(e[1]==='Próximamente'?'PRÓXIMAMENTE':'PORTADA','150px')}<div style="padding:14px">${bar('85%')}<div class="muted" style="font-size:12px">${e[1]==='Próximamente'?'Ep '+e[0]:e[2]+' · '+e[3]}</div></div></div>`).join('')}</div></div>`;
+  }
+  if(v==='C'){
+    return head+`<div class="wf-sec"><div style="display:grid;grid-template-columns:1fr 280px;gap:24px"><div>${EPISODES.map(e=>`<div class="row-flex" style="justify-content:space-between;padding:16px 0;border-top:1px solid #efeff3"><div>${bar('320px')}<span class="muted" style="font-size:12.5px">EP ${e[0]} · ${e[1]} · ${e[3]}</span></div>${btn('▶','sm')}</div>`).join('')}</div><div class="card pad-lg" style="align-self:start;background:var(--bg-alt)">${tag('¿Eres del sector?')}<h3 style="margin:8px 0;font-size:16px">Sé nuestro próximo invitado</h3>${para(2)}<div style="margin-top:12px">${btn('Postular','solid sm')}</div></div></div></div>`;
+  }
+  // A
+  return head+`<div class="wf-sec">${EPISODES.map(e=>`<div style="display:grid;grid-template-columns:120px 1fr;gap:20px;padding:22px 0;border-top:1px solid #efeff3"><div>${img('PORTADA','90px')}</div><div><div class="pill">EP ${e[0]}</div><h3 style="margin:8px 0 4px;font-size:18px;font-family:Georgia,serif">${e[1]}</h3><div class="muted" style="font-size:13px">${e[2]} · ${e[3]}</div><div style="margin-top:8px">${para(2)}</div><div class="row-flex" style="margin-top:10px">${btn('▶ Escuchar','solid sm')}${btn('Notas del episodio','sm')}</div></div></div>`).join('')}</div>`;
+}
+
+function sobre(v){
+  return `<div class="wf-sec"><span class="wf-tag">Sobre nosotros</span><h1 class="hl ${v==='A'?'serif':''}" style="font-size:32px;margin-top:10px">${v==='C'?'El equipo detrás del análisis':'Tres voces, un mismo foco'}</h1><p class="lead" style="max-width:680px">Quiénes somos, de dónde venimos y por qué nos obsesiona el lado de negocio del deporte.</p>${note('Historia + misión + los 3 hosts. '+(v==='C'?'Cierra con CTA a colaborar.':'Construye confianza y cercanía.'))}</div>
+  <div class="wf-sec" style="background:var(--bg-alt)"><div class="grid" style="grid-template-columns:repeat(3,1fr)">${HOSTS.map(h=>`<div class="card center">${img('FOTO','170px',v==='A'?'wf-circle':'')}<h3 style="margin:12px 0 2px;font-size:17px">${h[0]}</h3><div class="muted" style="font-size:12.5px">${h[1]}</div><div style="margin-top:10px;text-align:left">${para(2)}</div></div>`).join('')}</div></div>
+  <div class="wf-sec"><span class="wf-tag">Nuestra misión</span><h2 class="sec-title ${v==='A'?'serif':''}" style="margin-top:6px;max-width:760px">${v==='B'?'Hacer accesible el negocio del deporte, un episodio a la vez.':'Dar voz a quienes construyen la industria del deporte desde dentro.'}</h2><div style="max-width:720px;margin-top:12px">${para(3)}</div></div>
+  ${v==='C'?`<div class="wf-sec center" style="background:var(--bg-alt)">${tag('¿Conectamos?')}<h2 class="sec-title" style="margin:6px 0 14px">Colabora con el proyecto</h2><div class="row-flex" style="justify-content:center">${btn('Ser invitado','solid')}${btn('Patrocinar','')}</div></div>`:''}`;
+}
+
+function colabora(v){
+  const head=`<div class="wf-sec"><span class="wf-tag">Colabora · Objetivo principal de la web</span><h1 class="hl ${v==='A'?'serif':''}" style="font-size:34px;margin-top:10px">Forma parte de Horizon Sport</h1><p class="lead" style="max-width:700px">Dos formas de sumarte al proyecto. Elige tu perfil y cuéntanos.</p>${note('PÁGINA CLAVE de conversión. Caminos segmentados (Invitado / Patrocinador) + Media Kit descargable. Es donde se monetiza el proyecto.')}</div>`;
+  const mediakit=`<div class="wf-sec center" style="background:linear-gradient(180deg,#101C27,#0C141C);border-top:1px solid var(--accent-line);margin:0"><span class="wf-tag" style="color:var(--text-dim)">Dossier</span><h2 style="color:#fff;font-size:22px;margin:8px 0">Descarga el Media Kit</h2><p class="lead" style="color:var(--text-dim);max-width:560px;margin-left:auto;margin-right:auto">Propuesta de valor, formatos de colaboración, audiencia y contacto, en un PDF.</p><div style="margin-top:14px">${btn('⤓ Descargar Media Kit (PDF)','solid')}</div></div>`;
+  // two-path forms
+  const forms=`<div class="wf-sec"><div class="grid" style="grid-template-columns:1fr 1fr;gap:22px">
+    <div class="card pad-lg">${tag('Quiero ser invitado')}<h3 style="margin:8px 0;font-size:18px">Postula tu participación</h3><ul class="muted" style="font-size:13px;line-height:1.7;padding-left:18px"><li>Audiencia cualificada del sector</li><li>Difusión en podcast + newsletter + redes</li><li>Contenido profesional editado</li></ul>
+      <div style="margin-top:12px">${['Nombre','Empresa / cargo','Email','Sobre qué te gustaría hablar'].map(p=>`<div class="wf-img" style="height:${p.startsWith('Sobre')?'70px':'40px'};justify-content:flex-start;padding-left:12px;text-transform:none;font-weight:500;color:#9a9aa6;margin-bottom:10px">${p}</div>`).join('')}${btn('Enviar candidatura','solid')}</div>
+    </div>
+    <div class="card pad-lg">${tag('Quiero patrocinar')}<h3 style="margin:8px 0;font-size:18px">Hablemos de tu marca</h3><ul class="muted" style="font-size:13px;line-height:1.7;padding-left:18px"><li>Decisores del negocio del deporte</li><li>Menciones, contenido de marca, newsletter</li><li>Formatos a medida</li></ul>
+      <div style="margin-top:12px">${['Nombre','Marca / empresa','Email','Qué buscas conseguir'].map(p=>`<div class="wf-img" style="height:${p.startsWith('Qué')?'70px':'40px'};justify-content:flex-start;padding-left:12px;text-transform:none;font-weight:500;color:#9a9aa6;margin-bottom:10px">${p}</div>`).join('')}${btn('Solicitar propuesta','solid')}</div>
+    </div></div></div>`;
+  if(v==='C'){ // media kit first (high), then forms
+    return head+mediakit+`<div class="wf-sec center tight"><div class="row-flex" style="justify-content:center">${btn('● Soy profesional (invitado)','solid')}${btn('● Soy una marca (patrocinio)','')}</div><p class="muted" style="font-size:12px;margin-top:10px">Pestañas que muestran el formulario correspondiente</p></div>`+forms;
+  }
+  if(v==='B'){ // bold cards then forms then mediakit
+    return head+forms+mediakit;
+  }
+  // A: forms editorial then mediakit
+  return head+forms+mediakit;
+}
+
+function invitados(v){
+  const head=`<div class="wf-sec"><span class="wf-tag">Invitados</span><h1 class="hl ${v==='A'?'serif':''}" style="font-size:32px;margin-top:10px">Quién ha pasado por Horizon Sport</h1><p class="lead" style="max-width:680px">Profesionales que han compartido su visión del negocio del deporte. ${v==='C'?'<b>¿El próximo eres tú?</b>':''}</p>${note('Lanza en Fase 1 con 1 invitado real + tarjetas “Próximamente” que se rellenan según suben episodios. Refuerza credibilidad y sensación de actividad.')}</div>`;
+  const cards=GUESTS.map((g,i)=>`<div class="card ${v==='A'?'':'center'}">${img(i===0?'FOTO':'PRÓXIMAMENTE',v==='A'?'90px':'150px',v==='A'?'wf-circle':'')}<div style="margin-top:10px">${i===0?bar('70%'):'<span class="pill">Próximamente</span>'}</div><div class="muted" style="font-size:12px;margin-top:4px">${i===0?g[0]+' · '+g[1]:'Nuevo invitado en camino'}</div></div>`).join('');
+  const grid=v==='A'
+    ? `<div class="wf-sec">${GUESTS.map((g,i)=>`<div style="display:grid;grid-template-columns:80px 1fr auto;gap:18px;align-items:center;padding:16px 0;border-top:1px solid #efeff3">${img(i===0?'FOTO':'PRÓX','70px','wf-circle')}<div>${i===0?bar('50%'):'<span class="pill">Próximamente</span>'}<div class="muted" style="font-size:12.5px;margin-top:4px">${i===0?g[0]+' · '+g[1]:'Por anunciar'}</div></div>${i===0?btn('Ver episodio','sm'):'<span class="muted" style="font-size:12px">—</span>'}</div>`).join('')}</div>`
+    : `<div class="wf-sec"><div class="grid" style="grid-template-columns:repeat(4,1fr)">${cards}</div></div>`;
+  const cta=v==='C'?`<div class="wf-sec center" style="background:var(--bg-alt)">${tag('¿Eres del sector?')}<h2 class="sec-title" style="margin:6px 0 14px">Postula como invitado</h2>${btn('Quiero participar','solid')}</div>`:'';
+  return head+grid+cta;
+}
+
+function newsletter(v){
+  return `<div class="wf-sec"><span class="wf-tag">Newsletter</span><h1 class="hl ${v==='A'?'serif':''}" style="font-size:34px;margin-top:10px">${v==='C'?'Inteligencia del negocio del deporte, cada semana':'El negocio del deporte, en tu correo'}</h1><p class="lead" style="max-width:640px">Lo esencial de cada episodio más ideas que no contamos en el podcast. Sin spam.</p>${note('Fidelización en paralelo. Explica QUÉ recibes, CADA CUÁNTO y deja suscribirse. Conecta con la plataforma de email (a decidir en el spec).')}<div class="row-flex" style="margin-top:18px"><div class="wf-img" style="height:48px;width:360px;justify-content:flex-start;padding-left:14px;text-transform:none;font-weight:500;color:#9a9aa6">tu@email.com</div>${btn('Suscribirme gratis')}</div><div class="muted" style="font-size:12px;margin-top:8px">Cada semana · cancela cuando quieras</div></div>
+  <div class="wf-sec" style="background:var(--bg-alt)"><h2 class="sec-title">Qué recibes</h2><div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:16px">${['Resumen del episodio + 3 ideas accionables','Tendencias del sector','Acceso anticipado y extras'].map(t=>`<div class="card"><div class="pill">●</div><h3 style="margin:10px 0 6px;font-size:15px">${t}</h3>${para(2)}</div>`).join('')}</div></div>
+  <div class="wf-sec"><h2 class="sec-title">Un vistazo a un número</h2>${note('Mini-archivo / preview de un envío para dar confianza antes de suscribirse.')}<div class="card pad-lg" style="max-width:620px;background:var(--bg-alt)">${bar('60%')}${para(4)}</div></div>`;
+}
+
+/* ============================ ROUTER ============================ */
+const HOMES={A:homeA,B:homeB,C:homeC};
+function render(v,page){
+  let inner;
+  if(page==='inicio') inner=HOMES[v]();
+  else if(page==='episodios') inner=episodios(v);
+  else if(page==='sobre') inner=sobre(v);
+  else if(page==='colabora') inner=colabora(v);
+  else if(page==='invitados') inner=invitados(v);
+  else inner=newsletter(v);
+  return nav(v,page)+inner+footer(v);
+}
+
+const VARIANTS=[['A','Editorial · Autoridad'],['B','Show · Podcast-first'],['C','Conversión · Negocio']];
+const VDESC={
+  A:'<b>A · Editorial / Autoridad.</b> Personalidad de publicación seria de negocio del deporte. El texto es protagonista, tono sobrio y creíble. La home cuenta una historia y posiciona vuestra autoridad; los episodios van en lista tipo artículo y “Colabora” aparece como banda destacada. <i>Transmite el “esto va en serio”.</i>',
+  B:'<b>B · Show / Podcast-first.</b> Personalidad de show moderno y dinámico. El audio manda: reproductor destacado en el hero, episodios en rejilla visual con portadas, invitados en carrusel. <i>La más enganchante para dar a “play”, ideal si los oyentes ganan peso.</i>',
+  C:'<b>C · Conversión / Negocio.</b> Ordenada en torno al objetivo nº1: captar invitados y patrocinadores. Caminos segmentados desde el hero, barra de credibilidad y Media Kit muy arriba. <i>La más “comercial”, prioriza la monetización.</i>'
+};
+const PAGES=[['inicio','Inicio'],['episodios','Episodios'],['sobre','Sobre nosotros'],['colabora','Colabora'],['invitados','Invitados'],['newsletter','Newsletter']];
+
+let state={v:'A',page:'inicio'};
+function build(){
+  document.getElementById('vseg').innerHTML=VARIANTS.map(x=>`<button data-v="${x[0]}" class="${state.v===x[0]?'on':''}">${x[0]} · ${x[1].split(' · ')[1]||x[1]}</button>`).join('');
+  document.getElementById('pseg').innerHTML=PAGES.map(x=>`<button data-p="${x[0]}" class="${state.page===x[0]?'on':''}">${x[1]}</button>`).join('');
+  document.getElementById('vdesc').innerHTML=VDESC[state.v];
+  document.getElementById('vp').innerHTML=render(state.v,state.page);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('vseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.v=b.dataset.v;build();});
+document.getElementById('pseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;state.page=b.dataset.p;build();});
+build();
+</script>
+</body>
+</html>
