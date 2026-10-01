@@ -1,4 +1,5 @@
 ---
+import { LinkButton } from 'mochi-ui';
 import { navegacion } from '../data/contenido.js';
 const { activo = '' } = Astro.props;
 ---
@@ -23,7 +24,7 @@ const { activo = '' } = Astro.props;
       }
     </nav>
 
-    <a href="/colabora" class="boton boton--solido cabecera__cta">Colabora</a>
+    <LinkButton href="/colabora" variant="accent" className="cabecera__cta">Colabora</LinkButton>
   </div>
 
   <!-- En móvil el menú pasa a una fila desplazable: sigue siendo navegable sin JS. -->
@@ -81,7 +82,8 @@ const { activo = '' } = Astro.props;
     margin-left: auto;
   }
 
-  .cabecera__cta {
+  /* El botón es de Mochi (React): los estilos con ámbito de Astro no le llegan sin :global. */
+  :global(.cabecera__cta) {
     flex-shrink: 0;
   }
 

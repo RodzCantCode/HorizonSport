@@ -1,15 +1,37 @@
 ---
+import { LinkButton } from 'mochi-ui';
+
 const { episodio, resumen = false } = Astro.props;
 
 // La duración no se conoce hasta que el episodio está publicado del todo, así que
 // se omite en lugar de inventarla.
 const extras = [episodio.duracion].filter(Boolean);
+// La miniatura repite el enlace del botón: va fuera del orden de tabulación y oculta a lectores
+// de pantalla, para que no oigan dos veces el mismo enlace.
+const miniatura = episodio.url && episodio.miniatura;
 ---
 
-<article class="episodio">
+<article class:list={['episodio', { 'episodio--sin-miniatura': !miniatura }]}>
   <div class="episodio__numero estrecha" aria-hidden="true">Ep {episodio.numero}</div>
 
-  <div>
+  {
+    miniatura && (
+      <a class="episodio__miniatura" href={episodio.url} rel="noopener" tabindex="-1" aria-hidden="true">
+        <img
+          src={`/miniaturas/${miniatura}-960.webp`}
+          srcset={`/miniaturas/${miniatura}-480.webp 480w, /miniaturas/${miniatura}-960.webp 960w`}
+          sizes="(max-width: 700px) 100vw, (max-width: 1024px) 12rem, 16rem"
+          width="960"
+          height="540"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    )
+  }
+
+  <div class="episodio__texto">
     <h3 class="episodio__titulo">
       <span class="solo-lectores">Episodio {episodio.numero}: </span>{episodio.titulo}
     </h3>
@@ -19,11 +41,11 @@ const extras = [episodio.duracion].filter(Boolean);
     {resumen && <p class="parrafo episodio__resumen">{episodio.resumen}</p>}
   </div>
 
-  <div>
+  <div class="episodio__accion">
     {episodio.url && (
-      <a href={episodio.url} class="boton" rel="noopener">
+      <LinkButton href={episodio.url} variant="surface" rel="noopener">
         Ver el episodio
-      </a>
+      </LinkButton>
     )}
   </div>
 </article>
@@ -31,15 +53,45 @@ const extras = [episodio.duracion].filter(Boolean);
 <style>
   .episodio {
     display: grid;
-    grid-template-columns: 5rem 1fr auto;
+    grid-template-columns: 5rem 16rem minmax(0, 1fr) auto;
+    grid-template-areas: 'numero miniatura texto accion';
     gap: 1.5rem;
     align-items: start;
     padding-block: 1.75rem;
     border-top: 1px solid var(--linea);
   }
 
+  .episodio--sin-miniatura {
+    grid-template-columns: 5rem minmax(0, 1fr) auto;
+    grid-template-areas: 'numero texto accion';
+  }
+
   .episodio__numero {
+    grid-area: numero;
     padding-top: 0.5rem;
+  }
+
+  .episodio__miniatura {
+    grid-area: miniatura;
+    display: block;
+  }
+
+  .episodio__miniatura img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border: 1px solid var(--linea);
+    border-radius: 3px;
+    background: var(--tinta-600);
+  }
+
+  .episodio__texto {
+    grid-area: texto;
+  }
+
+  .episodio__accion {
+    grid-area: accion;
   }
 
   .episodio__titulo {
@@ -61,9 +113,22 @@ const extras = [episodio.duracion].filter(Boolean);
     max-width: 58ch;
   }
 
+  /* Con miniatura no caben cuatro columnas: el botón baja bajo el texto. */
+  @media (min-width: 701px) and (max-width: 1024px) {
+    .episodio:not(.episodio--sin-miniatura) {
+      grid-template-columns: 5rem 12rem minmax(0, 1fr);
+      grid-template-areas:
+        'numero miniatura texto'
+        'numero miniatura accion';
+      row-gap: 1rem;
+    }
+  }
+
   @media (max-width: 700px) {
-    .episodio {
+    .episodio,
+    .episodio--sin-miniatura {
       grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: 'numero' 'miniatura' 'texto' 'accion';
       gap: 0.75rem;
     }
     .episodio__numero {

@@ -3,16 +3,15 @@
 > Última revisión: **1-oct-2026**. Al cerrar un trabajo que cambie algo de aquí, actualiza la fecha y
 > la sección correspondiente.
 
-**En una frase:** la web está abierta en producción desde el estreno del 4-sep-2026. YouTube lleva
-**4 episodios**; producción enseña **1** y `preview` ya tiene los 4, pendientes de revisión antes de
-pasar a `main`. Los formularios siguen sin enviar a ningún sitio.
+**En una frase:** la web está abierta en producción desde el estreno del 4-sep-2026 y desde el
+1-oct-2026 enseña los **4 episodios** de YouTube, con sus miniaturas, y los botones y campos de Mochi.
+Los formularios siguen sin enviar a ningún sitio.
 
 ## Qué hay publicado
 
 | Dónde | Estado a 1-oct-2026 |
 | --- | --- |
-| https://www.horizonsport.co | Sitio completo. Último cambio de contenido en producción: 4-sep (`cc33a50`). |
-| Rama `preview` | Va por delante de `main` con los episodios 02–04 (1-oct-2026). |
+| https://www.horizonsport.co | Sitio completo. 1-oct-2026: episodios 02–04, miniaturas de YouTube en la lista de episodios, y botones y campos de Mochi con la paleta de Horizon. Se subió directo a `main`, sin pasar antes por un despliegue de prueba, a petición de Mario. `main` y `preview` están en el mismo commit. |
 | YouTube [@HorizonSportPODCAST](https://www.youtube.com/@HorizonSportPODCAST) | 4 episodios largos + shorts de cada uno (42 vídeos y 30 suscriptores a 29-sep). Ningún episodio largo nuevo a 1-oct. |
 | Instagram y TikTok | `@horizonsportpodcast`. Todavía no están enlazados desde la web. |
 
@@ -23,9 +22,9 @@ Fechas en hora de España. Duración redondeada al minuto, igual que el 01 (4616
 | # | Invitado | Publicado | Duración | Vídeo | En la web |
 | --- | --- | --- | --- | --- | --- |
 | 01 | **Santi Higuera** — luchador de MMA (WAR, WOW FC) | vie 4-sep, 19:00 | 1 h 17 min (4616 s) | [`-JBS4m7dXkM`](https://www.youtube.com/watch?v=-JBS4m7dXkM) | Sí |
-| 02 | **Javier Echaleku** — fundador de una marca de guantes de boxeo | vie 11-sep, 19:58 | 1 h 46 min (6360 s) | [`hRBRjxze-48`](https://www.youtube.com/watch?v=hRBRjxze-48) | En `preview` |
-| 03 | **Jorge Coll** — director y fundador de ESBS, escuela de negocio deportivo | vie 18-sep, 18:00 | 1 h 37 min (5816 s) | [`ydTVmDv9DvM`](https://www.youtube.com/watch?v=ydTVmDv9DvM) | En `preview` |
-| 04 | **Rafa Pallarés** — psicología del alto rendimiento | lun 28-sep, 00:15 | 1 h 43 min (6150 s) | [`Cq96pj-CuJE`](https://www.youtube.com/watch?v=Cq96pj-CuJE) | En `preview` |
+| 02 | **Javier Echaleku** — fundador de una marca de guantes de boxeo | vie 11-sep, 19:58 | 1 h 46 min (6360 s) | [`hRBRjxze-48`](https://www.youtube.com/watch?v=hRBRjxze-48) | Sí |
+| 03 | **Jorge Coll** — director y fundador de ESBS, escuela de negocio deportivo | vie 18-sep, 18:00 | 1 h 37 min (5816 s) | [`ydTVmDv9DvM`](https://www.youtube.com/watch?v=ydTVmDv9DvM) | Sí |
+| 04 | **Rafa Pallarés** — psicología del alto rendimiento | lun 28-sep, 00:15 | 1 h 43 min (6150 s) | [`Cq96pj-CuJE`](https://www.youtube.com/watch?v=Cq96pj-CuJE) | Sí |
 
 Títulos, resúmenes y contexto de cada invitado: [src/data/contenido.js](../src/data/contenido.js).
 Lo que la web dice de cada invitado sale de la descripción del vídeo y de los shorts del canal, nada más.
@@ -47,12 +46,9 @@ Contexto que hay que tener presente:
 
 ## Pendientes, por prioridad
 
-1. **Pasar a producción los episodios 02–04.** Están en `preview` desde el 1-oct-2026, con títulos,
-   resúmenes y el orden de la lista ya resueltos (el más reciente arriba). Falta que Mario los revise y
-   se fusionen en `main`.
-   - `episodiosProximos` e `invitados` siguen anunciando 05 y 06 como "Por anunciar", porque así sale
-     de la receta. **Mario tiene que decir cuántos quedan grabados sin publicar** (el 5 original era
-     una deducción, nunca se confirmó).
+1. **Próximos episodios.** `episodiosProximos` e `invitados` siguen anunciando 05 y 06 como "Por
+   anunciar", porque así sale de la receta. **Mario tiene que decir cuántos quedan grabados sin
+   publicar** (el 5 original era una deducción, nunca se confirmó).
 2. **Formularios muertos.** Los dos de `/colabora` (invitado y patrocinio) y los dos de newsletter
    (bloque común y página) envían a `action="#"`: quien los rellena pierde lo que escribe. Es el
    agujero más caro, porque `/colabora` es la página de conversión. Falta elegir backend (Formspree,
@@ -68,6 +64,9 @@ Contexto que hay que tener presente:
    "quienes dirigen la industria". Revisar junto con el posicionamiento.
 7. **Imagen social.** El `og:image` es la miniatura del estreno (`public/og-estreno.jpg`, 1280×720).
    Cambiarla por una imagen de marca cuando exista.
+8. **El titular de portada se sale en móvil.** A 375 px de ancho, "DESPACHOS" no cabe y la página se
+   desplaza 19 px en horizontal. También pasa en producción (comprobado el 1-oct-2026), así que no lo
+   trajo Mochi.
 
 ## Preguntas abiertas (las decide Mario)
 
@@ -76,7 +75,7 @@ Contexto que hay que tener presente:
 - ¿La web se alinea con la descripción nueva del canal (hacer carrera en la industria) o mantiene
   "el negocio del deporte"? El lema "El partido se juega en los despachos" no se toca sin preguntar.
 - ¿Se enlazan Instagram y TikTok desde el pie?
-- Fecha del 04: en `preview` va el **28-sep**, en hora de España como el resto de la tabla (en UTC
+- Fecha del 04: en la web va el **28-sep**, en hora de España como el resto de la tabla (en UTC
   sería el 27). ¿Se confirma?
 - ¿A qué se dedica Rafa Pallarés? Si es psicólogo deportivo u otra profesión concreta, su contexto en
   la web pasa del tema al cargo.

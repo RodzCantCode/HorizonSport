@@ -1,4 +1,5 @@
 ---
+import { Button, LinkButton, TextField } from 'mochi-ui';
 import Base from '../layouts/Base.astro';
 import EncabezadoPagina from '../components/EncabezadoPagina.astro';
 ---
@@ -21,7 +22,7 @@ import EncabezadoPagina from '../components/EncabezadoPagina.astro';
           Perfil de audiencia, formatos de colaboración y tarifas. Un PDF, sin registro.
         </p>
       </div>
-      <a href="#" class="boton boton--solido">Descargar</a>
+      <LinkButton href="#" variant="accent">Descargar</LinkButton>
     </div>
   </section>
 
@@ -43,25 +44,22 @@ import EncabezadoPagina from '../components/EncabezadoPagina.astro';
           </ul>
 
           <form class="via__form" method="post" action="#">
-            <label class="campo-form">
-              <span>Nombre</span>
-              <input type="text" name="nombre" required autocomplete="name" />
-            </label>
-            <label class="campo-form">
-              <span>Empresa y cargo</span>
-              <input type="text" name="empresa" required autocomplete="organization" />
-            </label>
-            <label class="campo-form">
-              <span>Email</span>
-              <input type="email" name="email" required autocomplete="email" />
-            </label>
-            <label class="campo-form">
-              <span>De qué te gustaría hablar</span>
-              <textarea name="tema" required></textarea>
-            </label>
-            <button type="submit" class="boton boton--solido boton--bloque">
+            <TextField client:visible label="Nombre" name="nombre" required autoComplete="name" />
+            <TextField
+              client:visible
+              label="Empresa y cargo"
+              name="empresa"
+              required
+              autoComplete="organization"
+            />
+            <TextField client:visible label="Email" name="email" type="email" required autoComplete="email" />
+            <div class="campo-largo">
+              <textarea class="campo-largo__texto" id="invitado-tema" name="tema" required placeholder=" "></textarea>
+              <label class="campo-largo__etiqueta" for="invitado-tema">De qué te gustaría hablar</label>
+            </div>
+            <Button type="submit" variant="accent" size="lg" className="boton-ancho">
               Enviar candidatura
-            </button>
+            </Button>
           </form>
         </article>
 
@@ -80,25 +78,22 @@ import EncabezadoPagina from '../components/EncabezadoPagina.astro';
           </ul>
 
           <form class="via__form" method="post" action="#">
-            <label class="campo-form">
-              <span>Nombre</span>
-              <input type="text" name="nombre" required autocomplete="name" />
-            </label>
-            <label class="campo-form">
-              <span>Marca o empresa</span>
-              <input type="text" name="marca" required autocomplete="organization" />
-            </label>
-            <label class="campo-form">
-              <span>Email</span>
-              <input type="email" name="email" required autocomplete="email" />
-            </label>
-            <label class="campo-form">
-              <span>Qué buscáis conseguir</span>
-              <textarea name="objetivo" required></textarea>
-            </label>
-            <button type="submit" class="boton boton--solido boton--bloque">
+            <TextField client:visible label="Nombre" name="nombre" required autoComplete="name" />
+            <TextField
+              client:visible
+              label="Marca o empresa"
+              name="marca"
+              required
+              autoComplete="organization"
+            />
+            <TextField client:visible label="Email" name="email" type="email" required autoComplete="email" />
+            <div class="campo-largo">
+              <textarea class="campo-largo__texto" id="patrocinio-objetivo" name="objetivo" required placeholder=" "></textarea>
+              <label class="campo-largo__etiqueta" for="patrocinio-objetivo">Qué buscáis conseguir</label>
+            </div>
+            <Button type="submit" variant="accent" size="lg" className="boton-ancho">
               Solicitar propuesta
-            </button>
+            </Button>
           </form>
         </article>
       </div>
@@ -160,6 +155,8 @@ import EncabezadoPagina from '../components/EncabezadoPagina.astro';
   }
 
   .via__form {
+    display: grid;
+    gap: 0.75rem;
     border-top: 1px solid var(--linea);
     padding-top: 1.4rem;
   }

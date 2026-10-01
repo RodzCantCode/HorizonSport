@@ -1,4 +1,5 @@
 ---
+import { Button, TextField } from 'mochi-ui';
 import Base from '../layouts/Base.astro';
 import EncabezadoPagina from '../components/EncabezadoPagina.astro';
 ---
@@ -16,17 +17,17 @@ import EncabezadoPagina from '../components/EncabezadoPagina.astro';
   <section class="seccion">
     <div class="envoltorio">
       <form class="alta__form" method="post" action="#">
-        <label class="solo-lectores" for="alta-email">Tu correo electrónico</label>
-        <input
-          class="boletin-input"
-          id="alta-email"
+        <TextField
+          client:load
+          className="alta__campo"
+          label="Tu correo electrónico"
           name="email"
           type="email"
           required
           placeholder="tu@empresa.com"
-          autocomplete="email"
+          autoComplete="email"
         />
-        <button type="submit" class="boton boton--solido">Suscribirme</button>
+        <Button type="submit" variant="accent" size="lg">Suscribirme</Button>
       </form>
       <p class="dato alta__nota">Cada jueves · cancelas cuando quieras</p>
 
@@ -62,7 +63,8 @@ import EncabezadoPagina from '../components/EncabezadoPagina.astro';
     max-width: 32rem;
   }
 
-  .alta__form .boletin-input {
+  /* Campo de Mochi (isla de React): sin :global no le llegan los estilos con ámbito. */
+  .alta__form :global(.alta__campo) {
     width: auto;
     min-width: 14rem;
     flex: 1;

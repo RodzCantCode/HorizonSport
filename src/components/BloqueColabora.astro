@@ -1,4 +1,5 @@
 ---
+import { LinkButton } from 'mochi-ui';
 const { compacto = false } = Astro.props;
 ---
 
@@ -16,7 +17,7 @@ const { compacto = false } = Astro.props;
           Si compites, entrenas, gestionas o vendes dentro del deporte, tienes una conversación que
           nuestra audiencia quiere escuchar.
         </p>
-        <a href="/colabora#invitado" class="boton boton--solido">Postular</a>
+        <LinkButton href="/colabora#invitado" variant="accent">Postular</LinkButton>
       </article>
 
       <article class="tarjeta tarjeta--decision">
@@ -26,8 +27,8 @@ const { compacto = false } = Astro.props;
           Llegas a decisores del sector, no a audiencia genérica. Formatos de integración a medida.
         </p>
         <div class="fila">
-          <a href="/colabora#patrocinio" class="boton boton--solido">Ver oportunidades</a>
-          <a href="/colabora#media-kit" class="boton">Media kit</a>
+          <LinkButton href="/colabora#patrocinio" variant="accent">Ver oportunidades</LinkButton>
+          <LinkButton href="/colabora#media-kit" variant="surface">Media kit</LinkButton>
         </div>
       </article>
     </div>

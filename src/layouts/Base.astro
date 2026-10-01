@@ -1,4 +1,8 @@
 ---
+// Mochi va antes que global.css: así la paleta de Horizon que redefine sus variables gana.
+// El tema oscuro de Mochi se activa con data-theme en <html>, no en un contenedor, porque lo que
+// abre encima (ventanas, avisos) se pinta al final de <body>.
+import 'mochi-ui/styles.css';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Pie from '../components/Pie.astro';
@@ -22,7 +26,7 @@ const imagen = new URL(imagenSocial, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

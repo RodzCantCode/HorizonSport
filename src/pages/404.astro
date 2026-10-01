@@ -1,4 +1,5 @@
 ---
+import { LinkButton } from 'mochi-ui';
 import Base from '../layouts/Base.astro';
 ---
 
@@ -11,8 +12,8 @@ import Base from '../layouts/Base.astro';
         El enlace está roto o la página cambió de sitio.
       </p>
       <div class="fila perdida__acciones">
-        <a href="/" class="boton boton--solido">Volver al inicio</a>
-        <a href="/episodios" class="boton">Ver episodios</a>
+        <LinkButton href="/" variant="accent">Volver al inicio</LinkButton>
+        <LinkButton href="/episodios" variant="surface">Ver episodios</LinkButton>
       </div>
     </div>
   </section>

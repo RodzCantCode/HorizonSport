@@ -170,41 +170,83 @@ ul {
   color: var(--papel-tenue);
 }
 
-/* --- Botones -------------------------------------------------------- */
-.boton {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.8rem 1.35rem;
-  border: 1px solid var(--linea-fuerte);
-  border-radius: 2px;
-  font-family: var(--fuente);
-  font-size: 0.875rem;
+/* --- Mochi con la paleta de Horizon --------------------------------- */
+/* Botones y campos vienen de Mochi (mochi-ui). Aquí solo se redefinen sus variables: la forma, el
+   tamaño y el movimiento son los de la librería. El rojo de error se queda con el de Mochi, porque
+   Horizon no tiene uno. Contrastes medidos sobre tinta-600, el fondo de campos y botones de
+   contorno: texto 14.6:1, texto secundario 6.4:1, azul sobre fondo 5.6:1. */
+:root[data-theme='dark'] {
+  --mochi-font-sans: var(--fuente);
+
+  --mochi-canvas: var(--tinta-900);
+  --mochi-on-canvas: var(--papel);
+  --mochi-on-canvas-muted: var(--papel-medio);
+
+  --mochi-solid: var(--tinta-600);
+  --mochi-on-solid: var(--papel);
+  --mochi-on-solid-muted: var(--papel-medio);
+  --mochi-solid-border: var(--linea-fuerte);
+
+  --mochi-surface: var(--tinta-600);
+  --mochi-on-surface: var(--papel);
+  --mochi-on-surface-muted: var(--papel-medio);
+  --mochi-surface-border: var(--linea-fuerte);
+
+  --mochi-accent: var(--azul);
+  --mochi-on-accent: var(--azul-tinta);
+  --mochi-accent-strong: var(--azul);
+  --mochi-focus-ring: var(--azul);
+  --mochi-scrim: rgba(7, 9, 12, 0.6);
+}
+
+/* Variantes en uso: `accent` (azul sólido) solo en CTA de conversión y `surface` para el resto. */
+.mochi-button,
+.mochi-button[data-size] {
   font-weight: 600;
-  color: var(--papel);
-  background: transparent;
-  cursor: pointer;
-  transition: border-color 0.18s ease, background-color 0.18s ease;
 }
 
-.boton:hover {
-  border-color: var(--papel-medio);
-}
-
-.boton--solido {
-  background: var(--azul);
-  border-color: var(--azul);
-  color: var(--azul-tinta);
+.mochi-button[data-tone='accent'] {
   font-weight: 700;
 }
 
-.boton--solido:hover {
-  background: #3aafff;
-  border-color: #3aafff;
+/* Mochi no trae estado de paso del ratón; se conserva el que tenían los botones de Horizon. */
+@media (hover: hover) {
+  .mochi-button[data-tone='accent']:hover {
+    background: #3aafff;
+  }
+
+  .mochi-button[data-tone='surface']:hover {
+    box-shadow: inset 0 0 0 1px var(--papel-tenue), var(--mochi-shadow-surface);
+  }
 }
 
-.boton--bloque {
+/* Los botones se pintan sin JavaScript, así que los muelles de Mochi no corren. Mochi publica
+   curvas CSS equivalentes a cada muelle para este caso: se hunden con `press`, vuelven con
+   `snappy` (el rebote suave) y el color cambia con `color`. Si un botón carga como isla
+   (data-measured), mandan sus muelles y esto se aparta. */
+.mochi-button:not([data-measured]) {
+  transition:
+    transform var(--mochi-duration-snappy) var(--mochi-ease-snappy),
+    background-color var(--mochi-duration-color) var(--mochi-ease-color),
+    box-shadow var(--mochi-duration-color) var(--mochi-ease-color);
+}
+
+.mochi-button:not([data-measured]):active {
+  transform: scale(0.965);
+  transition-duration: var(--mochi-duration-press), var(--mochi-duration-color),
+    var(--mochi-duration-color);
+  transition-timing-function: var(--mochi-ease-press), var(--mochi-ease-color),
+    var(--mochi-ease-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mochi-button:not([data-measured]):active {
+    transform: none;
+  }
+}
+
+.mochi-button.boton-ancho {
   width: 100%;
-  justify-content: center;
 }
 
 .enlace {
@@ -252,52 +294,61 @@ ul {
 }
 
 /* --- Formularios ---------------------------------------------------- */
-.campo-form {
+/* Los campos de una línea son el TextField de Mochi. Mochi no tiene campo de varias líneas, así que
+   el texto largo es un <textarea> que imita al TextField: mismo fondo, anillo y etiqueta que sube
+   (mismas medidas: sube 8 px y se queda al 75 %). Va sin JavaScript, con :placeholder-shown. */
+.campo-largo {
+  position: relative;
   display: block;
-  margin-bottom: 0.9rem;
 }
 
-.campo-form > span {
+.campo-largo__texto {
   display: block;
-  font-stretch: 75%;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--papel-tenue);
-  margin-bottom: 0.4rem;
-}
-
-.campo-form input,
-.campo-form textarea,
-.boletin-input {
   width: 100%;
-  padding: 0.75rem 0.9rem;
-  background: var(--tinta-600);
-  border: 1px solid var(--linea);
-  border-radius: 2px;
-  color: var(--papel);
-  font-family: var(--fuente);
-  font-size: 0.9375rem;
-  transition: border-color 0.18s ease;
-}
-
-.campo-form input::placeholder,
-.campo-form textarea::placeholder,
-.boletin-input::placeholder {
-  color: var(--papel-tenue);
-}
-
-.campo-form input:focus,
-.campo-form textarea:focus,
-.boletin-input:focus {
-  border-color: var(--azul);
-  outline: none;
-}
-
-.campo-form textarea {
-  min-height: 7rem;
+  min-height: 8rem;
+  margin: 0;
+  padding: 25px 22px 12px;
+  border: 0;
+  border-radius: var(--mochi-radius-lg);
+  background: var(--mochi-surface);
+  color: var(--mochi-on-surface);
+  box-shadow: inset 0 0 0 1px var(--mochi-surface-border), var(--mochi-shadow-surface);
+  font: var(--mochi-text-body-lg);
+  letter-spacing: -0.01em;
   resize: vertical;
+  transition: box-shadow var(--mochi-duration-snappy) var(--mochi-ease-snappy);
+}
+
+.campo-largo__texto:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--mochi-focus-ring), var(--mochi-shadow-surface);
+}
+
+.campo-largo__etiqueta {
+  position: absolute;
+  top: 17px;
+  left: 22px;
+  max-width: calc(100% - 44px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: var(--mochi-text-body-lg);
+  letter-spacing: -0.01em;
+  color: var(--mochi-on-surface-muted);
+  transform-origin: 0 0;
+  pointer-events: none;
+  transition: transform var(--mochi-duration-morph) var(--mochi-ease-morph);
+}
+
+.campo-largo__texto:focus + .campo-largo__etiqueta,
+.campo-largo__texto:not(:placeholder-shown) + .campo-largo__etiqueta {
+  transform: translateY(-8px) scale(0.75);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campo-largo__etiqueta {
+    transition: none;
+  }
 }
 
 /* --- Accesibilidad -------------------------------------------------- */

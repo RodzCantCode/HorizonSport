@@ -47,7 +47,8 @@ No hay tests. Verificar un cambio = `npm run build` sin errores y mirar la pági
    dos tipografías (la segunda, la "elegante": serif, itálica, en color de acento) y nada de texto
    descriptivo tipo tooltip (antetítulos sobre cada encabezado, una explicación bajo cada elemento,
    cajas de notas). Si Mario señala algo como "AI slop", se nombra el fallo y se quita; no se defiende.
-5. **El azul sólido `#169EFF` es solo para CTA de conversión** (colaborar, patrocinar, suscribirse).
+5. **El azul sólido `#169EFF` es solo para CTA de conversión** (colaborar, patrocinar, suscribirse):
+   en Mochi, `variant="accent"`; el resto de botones, `variant="surface"`.
 6. **Push a `main` = producción.** Vercel despliega solo. El trabajo en curso va en `preview` u otra
    rama, que generan despliegues de prueba.
 7. **Al cerrar un trabajo que cambie el estado, actualiza `docs/ESTADO.md`** con fecha absoluta
@@ -61,4 +62,6 @@ No hay tests. Verificar un cambio = `npm run build` sin errores y mirar la pági
   y cuerpo que explique el porqué.
 - Estilos: tokens y clases globales en `src/styles/global.css`; cada componente trae su `<style>` con
   clases tipo BEM en español (`.episodio__titulo`).
+- Botones y campos: componentes de Mochi (`mochi-ui`), nunca a mano. Sus colores se ajustan
+  redefiniendo las variables `--mochi-*` en `global.css` ([detalle](docs/DISENO.md#botones-y-campos-mochi)).
 - Copy directo, sin relleno ni emojis. Los comentarios del código explican el porqué, no el qué.

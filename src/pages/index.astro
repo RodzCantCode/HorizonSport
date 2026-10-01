@@ -1,4 +1,5 @@
 ---
+import { LinkButton } from 'mochi-ui';
 import Base from '../layouts/Base.astro';
 import FilaEpisodio from '../components/FilaEpisodio.astro';
 import BloqueColabora from '../components/BloqueColabora.astro';
@@ -21,8 +22,8 @@ const disponibles = plataformas.filter((p) => p.url);
       </p>
 
       <div class="fila hero__acciones">
-        <a href="/episodios" class="boton boton--solido">Escuchar los episodios</a>
-        <a href="/colabora" class="boton">Quiero participar</a>
+        <LinkButton href="/episodios" variant="accent">Escuchar los episodios</LinkButton>
+        <LinkButton href="/colabora" variant="surface">Quiero participar</LinkButton>
       </div>
 
       <p class="dato hero__plataformas">
@@ -59,7 +60,7 @@ const disponibles = plataformas.filter((p) => p.url);
     <div class="envoltorio">
       <div class="encabezado">
         <h2 class="titular-seccion ancha">Episodios</h2>
-        <a href="/episodios" class="boton">Ver todos</a>
+        <LinkButton href="/episodios" variant="surface">Ver todos</LinkButton>
       </div>
 
       <div class="lista">
@@ -74,7 +75,7 @@ const disponibles = plataformas.filter((p) => p.url);
     <div class="envoltorio">
       <div class="encabezado">
         <h2 class="titular-seccion ancha">Invitados</h2>
-        <a href="/invitados" class="boton">Ver todos</a>
+        <LinkButton href="/invitados" variant="surface">Ver todos</LinkButton>
       </div>
 
       <ul class="invitados">
@@ -95,7 +96,7 @@ const disponibles = plataformas.filter((p) => p.url);
     <div class="envoltorio">
       <div class="encabezado">
         <h2 class="titular-seccion ancha">Quiénes somos</h2>
-        <a href="/sobre-nosotros" class="boton">Conócenos</a>
+        <LinkButton href="/sobre-nosotros" variant="surface">Conócenos</LinkButton>
       </div>
 
       <ul class="rejilla rejilla--3">

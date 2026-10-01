@@ -1,6 +1,8 @@
 // Fuente única de contenido del sitio.
 // Los episodios que aparecen aquí son los realmente publicados. Los grabados que
 // aún no han salido van en `episodiosProximos`, sin nombre ni tema.
+// `miniatura` es el slug del archivo en public/miniaturas (p. ej. 'ep-04' -> ep-04-960.webp); se
+// genera con scripts/miniaturas.mjs. Si es null, la fila del episodio va sin imagen.
 
 export const marca = {
   nombre: 'Horizon Sport',
@@ -20,6 +22,7 @@ export const episodios = [
     fecha: '2026-09-28',
     fechaTexto: '28 de septiembre',
     url: 'https://www.youtube.com/watch?v=Cq96pj-CuJE',
+    miniatura: 'ep-04',
     resumen:
       'Rafa Pallarés explica por qué la psicología pesa tanto en el deporte y cómo se prepara la mente para competir, aguantar la presión y rendir cuando toca. Confianza, concentración y gestión de las emociones, y los problemas más habituales en competición: el miedo a fallar, los bloqueos y los nervios antes de salir.',
   },
@@ -32,6 +35,7 @@ export const episodios = [
     fecha: '2026-09-18',
     fechaTexto: '18 de septiembre',
     url: 'https://www.youtube.com/watch?v=ydTVmDv9DvM',
+    miniatura: 'ep-03',
     resumen:
       'Jorge Coll explica cómo se construye una carrera en la industria del deporte: dónde está el empleo, qué oportunidades hay para emprender, qué papel juegan las nuevas tecnologías y hacia dónde va el negocio.',
   },
@@ -44,6 +48,7 @@ export const episodios = [
     fecha: '2026-09-11',
     fechaTexto: '11 de septiembre',
     url: 'https://www.youtube.com/watch?v=hRBRjxze-48',
+    miniatura: 'ep-02',
     resumen:
       'Javier Echaleku cuenta cómo creó su propia marca de guantes de boxeo y lo que cuesta sacar adelante una empresa en un sector con tanta competencia. Marketing, ventas y emprendimiento, y el negocio del boxeo que no se ve desde el ring: patrocinios, oportunidades y dificultades.',
   },
@@ -56,6 +61,7 @@ export const episodios = [
     fecha: '2026-09-04',
     fechaTexto: '4 de septiembre',
     url: 'https://www.youtube.com/watch?v=-JBS4m7dXkM',
+    miniatura: 'ep-01',
     resumen:
       'Santi Higuera cuenta cómo está construyendo su carrera en las MMA, desde sus primeras peleas hasta competir en organizaciones como WAR y WOW FC. Su evolución como luchador, la polémica pelea con Leo Climent, el peso que tiene la fe y todo lo que hay detrás de intentar vivir de esto: dinero, marca personal, oportunidades y negocio.',
   },

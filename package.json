@@ -9,6 +9,12 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^5.14.1"
+    "@astrojs/react": "^4.4.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "astro": "^5.14.1",
+    "mochi-ui": "github:RodzCantCode/mochi#v0.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   }
 }

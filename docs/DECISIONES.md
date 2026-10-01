@@ -26,6 +26,9 @@ formulario, y un **media kit en PDF** descargable.
 ## Técnica
 
 - **Astro estático**, sin backend.
+- **1-oct-2026 — React, solo para Mochi** (`@astrojs/react`). Los enlaces con forma de botón se pintan
+  en el servidor y no cargan JavaScript; solo los campos de formulario van como islas. La integración
+  va en la 4.x, la que corresponde a Astro 5 (ver [INFRA → Mochi](INFRA.md#mochi)).
 - **Solo en español. Modo oscuro por defecto** (no hay modo claro).
 - **`src/data/contenido.js` es la fuente única** de contenido. Las páginas no llevan datos escritos a mano.
 - **Dominio `horizonsport.co`** declarado como `site` en `astro.config.mjs`. Canonical y `og:url`
@@ -48,6 +51,15 @@ formulario, y un **media kit en PDF** descargable.
   familia (Archivo variable) y saca el contraste del eje de anchura.
 - **Las notas de trabajo no van en la página.** En la v1 había cajas que explicaban la web al
   visitante. Esas notas viven ahora en `docs/ESTADO.md`.
+- **1-oct-2026 — Botones y campos de Mochi, en forma de píldora.** Mario pidió usar su librería de
+  componentes con la paleta de Horizon. Se eligió conservar la píldora de Mochi en vez de forzar las
+  esquinas casi rectas de antes: la forma es lo que define a la librería (al enviar, el botón se
+  encoge a círculo) y forzarla iría contra su diseño. La letra sí se cambia a Archivo, porque la
+  regla de una sola familia es una línea roja. También se pasaron a Mochi los campos de formulario,
+  sabiendo que añaden JavaScript a esas páginas. Detalle en [DISENO → Mochi](DISENO.md#botones-y-campos-mochi).
+- **1-oct-2026 — Miniaturas de YouTube en la lista de episodios**, a petición de Mario. Se sirven desde
+  el propio dominio (no se cargan de YouTube) y van en la lista, sin convertirla en rejilla de
+  carátulas. La portada (el titular de arriba) sigue sin imagen.
 
 ## Contenido y posicionamiento
 

@@ -1,4 +1,5 @@
 ---
+import { LinkButton } from 'mochi-ui';
 import { navegacion, plataformas } from '../data/contenido.js';
 const anio = new Date().getFullYear();
 const disponibles = plataformas.filter((p) => p.url);
@@ -42,7 +43,7 @@ const disponibles = plataformas.filter((p) => p.url);
         <p class="dato pie__nota">
           El análisis de cada episodio, en tu correo. Sin spam, cancelas cuando quieras.
         </p>
-        <a href="/newsletter" class="boton pie__boton">Suscribirme</a>
+        <LinkButton href="/newsletter" variant="surface" size="sm">Suscribirme</LinkButton>
       </div>
     </div>
 
@@ -115,11 +116,6 @@ const disponibles = plataformas.filter((p) => p.url);
   .pie__nota {
     margin-bottom: 0.9rem;
     max-width: 30ch;
-  }
-
-  .pie__boton {
-    font-size: 0.8125rem;
-    padding: 0.6rem 1rem;
   }
 
   .pie__regla {

@@ -1,4 +1,5 @@
 ---
+import { LinkButton } from 'mochi-ui';
 import Base from '../layouts/Base.astro';
 import EncabezadoPagina from '../components/EncabezadoPagina.astro';
 import { invitados } from '../data/contenido.js';
@@ -28,9 +29,7 @@ import { invitados } from '../data/contenido.js';
                 {inv.rol && <p class="dato">{inv.rol}</p>}
               </div>
               {inv.publicado && (
-                <a href="/episodios" class="boton">
-                  Ver episodio
-                </a>
+                <LinkButton href="/episodios" variant="surface">Ver episodio</LinkButton>
               )}
             </li>
           ))
@@ -42,7 +41,7 @@ import { invitados } from '../data/contenido.js';
   <section class="seccion seccion--alterna seccion--ajustada">
     <div class="envoltorio llamada">
       <h2 class="titular-seccion ancha">Postula como invitado</h2>
-      <a href="/colabora#invitado" class="boton boton--solido">Quiero participar</a>
+      <LinkButton href="/colabora#invitado" variant="accent">Quiero participar</LinkButton>
     </div>
   </section>
 </Base>

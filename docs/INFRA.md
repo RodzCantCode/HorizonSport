@@ -13,6 +13,9 @@ npm run dev
 
 Si ya lo tenías clonado: `git pull` en `main`.
 
+`npm install` descarga además Mochi desde GitHub y lo compila (ver [Mochi](#mochi)), así que necesita
+conexión y tarda un poco más la primera vez.
+
 **Qué no está en el repo, y dónde encontrarlo:**
 
 | Qué | Dónde |
@@ -61,6 +64,25 @@ Cosas que conviene saber:
 - El proyecto de los wireframes (`horizon-sport-wireframes`) da 404 desde el 29-sep-2026. La copia está
   en `docs/referencia/`.
 
+## Mochi
+
+Los botones y campos son de Mochi, la librería de componentes de Mario
+(https://github.com/RodzCantCode/mochi, pública). Cómo se usan en la web: [DISENO → Mochi](DISENO.md#botones-y-campos-mochi).
+
+- **Se instala fijando una versión** (una etiqueta del repo de Mochi): en `package.json`,
+  `"mochi-ui": "github:RodzCantCode/mochi#v0.3.0"`. Así la web no cambia aunque Mochi siga avanzando.
+- **Subir de versión:** `npm install github:RodzCantCode/mochi#vX.Y.Z`, compilar y revisar botones y
+  formularios en escritorio y móvil.
+- **Probar cambios de Mochi sin sacar versión:** desde esta carpeta,
+  `npm install ../mochi --install-links` (el porqué del `--install-links` está en el README de Mochi).
+  Solo para probar en local: antes de hacer push, vuelve a la versión de GitHub.
+- **Trampa con `npx astro add react`:** instala la última `@astrojs/react` (la 7.x en octubre de 2026),
+  que es para un Astro más nuevo y trae su propio Vite. Con Astro 5 va la **4.x**
+  (`npm install @astrojs/react@^4.4.2`). Si se actualiza Astro, hay que subir también esta.
+- Vercel lo descarga y compila desde GitHub en cada despliegue (el primero, el 1-oct-2026). Si un día
+  no consigue instalarlo, el fallo sale en el log de compilación al descargar `mochi-ui`, y producción
+  se queda con el despliegue anterior.
+
 ## Herramientas de Claude disponibles (en el equipo de Mario)
 
 - **Conector de Vercel** (claude.ai): sirve para leer despliegues, dominios y logs con los IDs de arriba.
@@ -88,6 +110,9 @@ Cosas que conviene saber:
      (`'11 de septiembre'`), `url` y `resumen` (redactado a partir de la descripción, sin copiarla).
    - En **`invitados`**, rellena la fila de ese número con `publicado: true`.
    - Quita ese número de **`episodiosProximos`**.
+   - Pon `miniatura: 'ep-NN'` en el episodio y ejecuta `node scripts/miniaturas.mjs`: descarga la
+     miniatura de YouTube y la guarda en `public/miniaturas` en dos anchos. Solo genera las que
+     faltan; para rehacer una, borra sus dos archivos.
 3. `npm run build`, revisa `/`, `/episodios` y `/invitados`, y haz push.
 4. Actualiza la tabla de episodios de [ESTADO.md](ESTADO.md).
 
