@@ -9,7 +9,44 @@ export const marca = {
     'Conversaciones con quienes viven la industria del deporte por dentro: deportistas, entrenadores, marcas y gestores. El lado que no se ve desde la grada.',
 };
 
+// Del más reciente al más antiguo: las páginas los pintan en este orden.
 export const episodios = [
+  {
+    numero: '04',
+    titulo: 'La psicología detrás del alto rendimiento',
+    invitado: 'Rafa Pallarés',
+    contexto: 'Psicología del alto rendimiento',
+    duracion: '1 h 43 min',
+    fecha: '2026-09-28',
+    fechaTexto: '28 de septiembre',
+    url: 'https://www.youtube.com/watch?v=Cq96pj-CuJE',
+    resumen:
+      'Rafa Pallarés explica por qué la psicología pesa tanto en el deporte y cómo se prepara la mente para competir, aguantar la presión y rendir cuando toca. Confianza, concentración y gestión de las emociones, y los problemas más habituales en competición: el miedo a fallar, los bloqueos y los nervios antes de salir.',
+  },
+  {
+    numero: '03',
+    titulo: '¿Cómo trabajar en la industria deportiva?',
+    invitado: 'Jorge Coll',
+    contexto: 'Fundador de la escuela de negocio deportivo ESBS',
+    duracion: '1 h 37 min',
+    fecha: '2026-09-18',
+    fechaTexto: '18 de septiembre',
+    url: 'https://www.youtube.com/watch?v=ydTVmDv9DvM',
+    resumen:
+      'Jorge Coll explica cómo se construye una carrera en la industria del deporte: dónde está el empleo, qué oportunidades hay para emprender, qué papel juegan las nuevas tecnologías y hacia dónde va el negocio.',
+  },
+  {
+    numero: '02',
+    titulo: 'Marketing, boxeo y guantes: cómo crear una marca de boxeo',
+    invitado: 'Javier Echaleku',
+    contexto: 'Fundador de una marca de guantes de boxeo',
+    duracion: '1 h 46 min',
+    fecha: '2026-09-11',
+    fechaTexto: '11 de septiembre',
+    url: 'https://www.youtube.com/watch?v=hRBRjxze-48',
+    resumen:
+      'Javier Echaleku cuenta cómo creó su propia marca de guantes de boxeo y lo que cuesta sacar adelante una empresa en un sector con tanta competencia. Marketing, ventas y emprendimiento, y el negocio del boxeo que no se ve desde el ring: patrocinios, oportunidades y dificultades.',
+  },
   {
     numero: '01',
     titulo: 'Del anonimato a WOW FC: cómo vivir de las MMA',
@@ -26,9 +63,6 @@ export const episodios = [
 
 // Grabados y pendientes de edición: se anuncian cuando hay fecha.
 export const episodiosProximos = [
-  { numero: '02', pista: 'Por anunciar' },
-  { numero: '03', pista: 'Por anunciar' },
-  { numero: '04', pista: 'Por anunciar' },
   { numero: '05', pista: 'Por anunciar' },
   { numero: '06', pista: 'Por anunciar' },
 ];
@@ -57,9 +91,9 @@ export const hosts = [
 
 export const invitados = [
   { nombre: 'Santi Higuera', rol: 'Luchador de MMA', episodio: '01', publicado: true },
-  { nombre: null, rol: null, episodio: '02', publicado: false },
-  { nombre: null, rol: null, episodio: '03', publicado: false },
-  { nombre: null, rol: null, episodio: '04', publicado: false },
+  { nombre: 'Javier Echaleku', rol: 'Fundador de una marca de guantes de boxeo', episodio: '02', publicado: true },
+  { nombre: 'Jorge Coll', rol: 'Fundador de la escuela de negocio deportivo ESBS', episodio: '03', publicado: true },
+  { nombre: 'Rafa Pallarés', rol: 'Psicología del alto rendimiento', episodio: '04', publicado: true },
   { nombre: null, rol: null, episodio: '05', publicado: false },
   { nombre: null, rol: null, episodio: '06', publicado: false },
 ];

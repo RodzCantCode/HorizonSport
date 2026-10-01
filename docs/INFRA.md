@@ -76,10 +76,13 @@ Cosas que conviene saber:
      últimos 15, shorts incluidos, con título, fecha e ID, pero sin duración.
    - Duración (`lengthSeconds`), fecha (`publishDate`) y descripción (`shortDescription`) están en el
      HTML de `youtube.com/watch?v=<id>`. Desde España YouTube redirige antes a una pantalla de cookies:
-     ábrelo en el navegador, pulsa "Rechazar todo" y lee la página.
+     ábrelo en el navegador, pulsa "Rechazar todo" y lee la página. Con `curl` basta con mandar la
+     cookie `SOCS=CAI` (`-H 'Cookie: SOCS=CAI'`); los datos van en el JSON `ytInitialPlayerResponse`.
+   - `publishDate` viene en hora del Pacífico. Pásala a hora de España antes de escribir la fecha: un
+     estreno de madrugada cambia de día (el 04 sale como 27-sep y en España fue el 28).
    - Si el estreno no ha terminado, YouTube no da la duración. Déjala en `null` (no se pinta).
 2. En [src/data/contenido.js](../src/data/contenido.js):
-   - Añade el episodio a **`episodios`**: `numero` (dos cifras), `titulo` (versión limpia del título de
+   - Añade el episodio **al principio** de **`episodios`** (van del más reciente al más antiguo): `numero` (dos cifras), `titulo` (versión limpia del título de
      YouTube, sin mayúsculas de gancho), `invitado`, `contexto` (quién es, en pocas palabras),
      `duracion` (`'1 h 46 min'`, redondeada al minuto), `fecha` (`'AAAA-MM-DD'`), `fechaTexto`
      (`'11 de septiembre'`), `url` y `resumen` (redactado a partir de la descripción, sin copiarla).
