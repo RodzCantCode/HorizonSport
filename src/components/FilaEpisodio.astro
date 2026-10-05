@@ -1,5 +1,6 @@
 ---
 import { LinkButton } from 'mochi-ui';
+import Marcador from './Marcador.astro';
 
 const { episodio, resumen = false } = Astro.props;
 
@@ -11,12 +12,22 @@ const extras = [episodio.duracion].filter(Boolean);
 const miniatura = episodio.url && episodio.miniatura;
 ---
 
-<article class:list={['episodio', { 'episodio--sin-miniatura': !miniatura }]}>
-  <div class="episodio__numero estrecha" aria-hidden="true">Ep {episodio.numero}</div>
+<article
+  class:list={['episodio', 'fila-trazada', { 'episodio--sin-miniatura': !miniatura }]}
+  data-revela="fila"
+>
+  <div class="episodio__numero estrecha" aria-hidden="true">Ep <Marcador valor={episodio.numero} /></div>
 
   {
     miniatura && (
-      <a class="episodio__miniatura" href={episodio.url} rel="noopener" tabindex="-1" aria-hidden="true">
+      <a
+        class="episodio__miniatura cortinilla"
+        data-revela="cortinilla"
+        href={episodio.url}
+        rel="noopener"
+        tabindex="-1"
+        aria-hidden="true"
+      >
         <img
           src={`/miniaturas/${miniatura}-960.webp`}
           srcset={`/miniaturas/${miniatura}-480.webp 480w, /miniaturas/${miniatura}-960.webp 960w`}
@@ -58,7 +69,6 @@ const miniatura = episodio.url && episodio.miniatura;
     gap: 1.5rem;
     align-items: start;
     padding-block: 1.75rem;
-    border-top: 1px solid var(--linea);
   }
 
   .episodio--sin-miniatura {
@@ -71,9 +81,9 @@ const miniatura = episodio.url && episodio.miniatura;
     padding-top: 0.5rem;
   }
 
+  /* El borde, el radio y el fondo los pone .cortinilla (global.css). */
   .episodio__miniatura {
     grid-area: miniatura;
-    display: block;
   }
 
   .episodio__miniatura img {
@@ -81,9 +91,13 @@ const miniatura = episodio.url && episodio.miniatura;
     height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    border: 1px solid var(--linea);
-    border-radius: 3px;
-    background: var(--tinta-600);
+  }
+
+  /* La miniatura es un enlace: al pasar el ratón la imagen se acerca un poco dentro de su marco. */
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .episodio__miniatura:hover img {
+      transform: scale(1.05);
+    }
   }
 
   .episodio__texto {

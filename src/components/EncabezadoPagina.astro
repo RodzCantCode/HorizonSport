@@ -1,11 +1,18 @@
 ---
+import TitularCinetico from './TitularCinetico.astro';
 const { titulo, entradilla = null } = Astro.props;
 ---
 
 <section class="encabezado-pagina">
   <div class="envoltorio">
-    <h1 class="titular-pagina ancha">{titulo}</h1>
-    {entradilla && <p class="entradilla encabezado-pagina__entradilla">{entradilla}</p>}
+    <TitularCinetico class="titular-pagina ancha" texto={titulo} />
+    {
+      entradilla && (
+        <p class="entradilla encabezado-pagina__entradilla" data-revela="rotulo">
+          {entradilla}
+        </p>
+      )
+    }
   </div>
 </section>
 

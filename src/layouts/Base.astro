@@ -48,6 +48,17 @@ const imagen = new URL(imagenSocial, Astro.site).href;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={imagen} />
 
+    <!-- Activa los estados de entrada (ver "Movimiento" en global.css) antes de pintar, para que nada
+         aparezca y luego se esconda. Si el script de movimiento no ha arrancado a los 3 s, se
+         quitan y la página se ve entera, sin animar. -->
+    <script is:inline>
+      document.documentElement.classList.add('con-movimiento');
+      setTimeout(function () {
+        var raiz = document.documentElement;
+        if (!raiz.classList.contains('movimiento-listo')) raiz.classList.remove('con-movimiento');
+      }, 3000);
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -63,5 +74,8 @@ const imagen = new URL(imagenSocial, Astro.site).href;
       <slot />
     </main>
     <Pie />
+    <script>
+      import '../scripts/movimiento.js';
+    </script>
   </body>
 </html>

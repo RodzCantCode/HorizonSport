@@ -2,6 +2,7 @@
 import { LinkButton } from 'mochi-ui';
 import Base from '../layouts/Base.astro';
 import EncabezadoPagina from '../components/EncabezadoPagina.astro';
+import Marcador from '../components/Marcador.astro';
 import { invitados } from '../data/contenido.js';
 ---
 
@@ -20,8 +21,8 @@ import { invitados } from '../data/contenido.js';
       <ul class="lista">
         {
           invitados.map((inv) => (
-            <li class="fila-inv">
-              <span class="estrecha">Ep {inv.episodio}</span>
+            <li class="fila-inv fila-trazada" data-revela="fila">
+              <span class="estrecha">Ep <Marcador valor={inv.episodio} /></span>
               <div>
                 <p class:list={['titular-tarjeta', { 'fila-inv--pendiente': !inv.publicado }]}>
                   {inv.publicado ? inv.nombre : 'Por anunciar'}
@@ -40,7 +41,7 @@ import { invitados } from '../data/contenido.js';
 
   <section class="seccion seccion--alterna seccion--ajustada">
     <div class="envoltorio llamada">
-      <h2 class="titular-seccion ancha">Postula como invitado</h2>
+      <h2 class="titular-seccion ancha" data-revela="rotulo">Postula como invitado</h2>
       <LinkButton href="/colabora#invitado" variant="accent">Quiero participar</LinkButton>
     </div>
   </section>
@@ -57,7 +58,6 @@ import { invitados } from '../data/contenido.js';
     gap: 1.5rem;
     align-items: center;
     padding-block: 1.35rem;
-    border-top: 1px solid var(--linea);
   }
 
   .fila-inv--pendiente {

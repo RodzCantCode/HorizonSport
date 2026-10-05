@@ -1,17 +1,18 @@
 # Estado del proyecto
 
-> Última revisión: **1-oct-2026**. Al cerrar un trabajo que cambie algo de aquí, actualiza la fecha y
+> Última revisión: **5-oct-2026**. Al cerrar un trabajo que cambie algo de aquí, actualiza la fecha y
 > la sección correspondiente.
 
 **En una frase:** la web está abierta en producción desde el estreno del 4-sep-2026 y desde el
 1-oct-2026 enseña los **4 episodios** de YouTube, con sus miniaturas, y los botones y campos de Mochi.
-Los formularios siguen sin enviar a ningún sitio.
+Los formularios siguen sin enviar a ningún sitio. Desde el 5-oct-2026 tiene el **rediseño de
+movimiento** ([DISENO → Movimiento](DISENO.md#movimiento)).
 
 ## Qué hay publicado
 
-| Dónde | Estado a 1-oct-2026 |
+| Dónde | Estado a 5-oct-2026 |
 | --- | --- |
-| https://www.horizonsport.co | Sitio completo. 1-oct-2026: episodios 02–04, miniaturas de YouTube en la lista de episodios, y botones y campos de Mochi con la paleta de Horizon. Se subió directo a `main`, sin pasar antes por un despliegue de prueba, a petición de Mario. `main` y `preview` están en el mismo commit. |
+| https://www.horizonsport.co | Sitio completo. 1-oct-2026: episodios 02–04, miniaturas de YouTube en la lista de episodios, y botones y campos de Mochi con la paleta de Horizon. 5-oct-2026: rediseño de movimiento, titular de portada que ya cabe en móvil, `/sobre-nosotros` sin las bios de los hosts e Izan como "Host · Negocio" ([por qué](DECISIONES.md#contenido-y-posicionamiento)). Las dos veces se subió directo a `main`, sin pasar antes por un despliegue de prueba, a petición de Mario. El 5-oct se probó en local con un navegador automático (escritorio y móvil), no en dispositivos reales. `preview` se quedó en el commit del 1-oct. |
 | YouTube [@HorizonSportPODCAST](https://www.youtube.com/@HorizonSportPODCAST) | 4 episodios largos + shorts de cada uno (42 vídeos y 30 suscriptores a 29-sep). Ningún episodio largo nuevo a 1-oct. |
 | Instagram y TikTok | `@horizonsportpodcast`. Todavía no están enlazados desde la web. |
 
@@ -64,9 +65,11 @@ Contexto que hay que tener presente:
    "quienes dirigen la industria". Revisar junto con el posicionamiento.
 7. **Imagen social.** El `og:image` es la miniatura del estreno (`public/og-estreno.jpg`, 1280×720).
    Cambiarla por una imagen de marca cuando exista.
-8. **El titular de portada se sale en móvil.** A 375 px de ancho, "DESPACHOS" no cabe y la página se
-   desplaza 19 px en horizontal. También pasa en producción (comprobado el 1-oct-2026), así que no lo
-   trajo Mochi.
+8. **HECHO (5-oct-2026). El titular de portada se salía en móvil.** Con un tamaño mínimo menor,
+   "DESPACHOS" cabe a 375 px y la página ya no se desplaza en horizontal.
+9. **Revisar el movimiento en dispositivos reales** (alta: 5-oct-2026). Ya está en producción, pero
+   solo se probó en local con un navegador automático. Falta verlo en un iPhone y en un Mac con
+   pantalla de 120 Hz, en Safari y en Chrome, con y sin "reducir movimiento".
 
 ## Preguntas abiertas (las decide Mario)
 

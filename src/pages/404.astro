@@ -1,13 +1,14 @@
 ---
 import { LinkButton } from 'mochi-ui';
 import Base from '../layouts/Base.astro';
+import TitularCinetico from '../components/TitularCinetico.astro';
 ---
 
 <Base titulo="Página no encontrada">
   <section class="perdida">
     <div class="envoltorio">
       <p class="estrecha">Error 404</p>
-      <h1 class="titular-pagina ancha perdida__titulo">Esta página no existe</h1>
+      <TitularCinetico class="titular-pagina ancha perdida__titulo" texto="Esta página no existe" />
       <p class="entradilla perdida__texto">
         El enlace está roto o la página cambió de sitio.
       </p>

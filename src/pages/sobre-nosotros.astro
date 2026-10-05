@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import EncabezadoPagina from '../components/EncabezadoPagina.astro';
 import Retrato from '../components/Retrato.astro';
 import BloqueColabora from '../components/BloqueColabora.astro';
+import TextoEncendido from '../components/TextoEncendido.astro';
 import { hosts } from '../data/contenido.js';
 ---
 
@@ -25,7 +26,6 @@ import { hosts } from '../data/contenido.js';
               <Retrato foto={h.foto} nombre={h.nombre} rol={h.rol} />
               <p class="titular-tarjeta host__nombre">{h.nombre}</p>
               {h.rol && <p class="estrecha host__rol">{h.rol}</p>}
-              {h.bio && <p class="parrafo host__bio">{h.bio}</p>}
             </li>
           ))
         }
@@ -35,9 +35,10 @@ import { hosts } from '../data/contenido.js';
 
   <section class="seccion seccion--alterna">
     <div class="envoltorio">
-      <p class="mision">
-        Dar voz a quienes construyen la industria del deporte desde dentro.
-      </p>
+      <TextoEncendido
+        class="mision"
+        texto="Dar voz a quienes construyen la industria del deporte desde dentro."
+      />
       <div class="mision__texto">
         <p class="parrafo">
           Hay mucho contenido sobre lo que ocurre en el campo y muy poco sobre lo que lo hace
@@ -63,11 +64,6 @@ import { hosts } from '../data/contenido.js';
   .host__rol {
     color: var(--azul);
     margin-top: 0.3rem;
-  }
-
-  .host__bio {
-    margin-top: 0.65rem;
-    font-size: 0.9375rem;
   }
 
   .mision {

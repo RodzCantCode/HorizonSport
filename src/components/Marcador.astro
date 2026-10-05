@@ -1,0 +1,24 @@
+---
+// Cifras como las de un marcador de estadio: cada dígito es una tira que rueda hasta su valor
+// cuando su fila aparece (estilos en global.css, "Cifras de marcador").
+// Las tiras son decorado: los lectores de pantalla leen el valor de verdad, en texto oculto.
+const { valor } = Astro.props;
+const digitos = String(valor).split('');
+const tira = [...'01234567890123456789'];
+---
+
+<span class="marcador"
+  ><span class="solo-lectores">{valor}</span><span aria-hidden="true"
+    >{
+      digitos.map((d, i) => (
+        <span class="marcador__digito" style={`--d:${d};--orden:${i}`}>
+          <span class="marcador__tira">
+            {tira.map((n) => (
+              <span>{n}</span>
+            ))}
+          </span>
+        </span>
+      ))
+    }</span
+  ></span
+>

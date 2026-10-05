@@ -5,12 +5,12 @@ const { compacto = false } = Astro.props;
 
 <section class="colabora" aria-labelledby="colabora-titulo">
   <div class="envoltorio">
-    <h2 class="titular-seccion ancha colabora__titulo" id="colabora-titulo">
+    <h2 class="titular-seccion ancha colabora__titulo" id="colabora-titulo" data-revela="rotulo">
       Pon tu voz o tu marca en Horizon Sport
     </h2>
 
     <div class="rejilla rejilla--2 colabora__rejilla">
-      <article class="tarjeta tarjeta--decision">
+      <article class="tarjeta tarjeta--decision" data-revela="desde-izquierda">
         <span class="estrecha">Profesionales</span>
         <h3 class="titular-tarjeta colabora__sub">Ser invitado</h3>
         <p class="parrafo colabora__texto">
@@ -20,7 +20,7 @@ const { compacto = false } = Astro.props;
         <LinkButton href="/colabora#invitado" variant="accent">Postular</LinkButton>
       </article>
 
-      <article class="tarjeta tarjeta--decision">
+      <article class="tarjeta tarjeta--decision" data-revela="desde-derecha">
         <span class="estrecha">Marcas</span>
         <h3 class="titular-tarjeta colabora__sub">Patrocinar</h3>
         <p class="parrafo colabora__texto">

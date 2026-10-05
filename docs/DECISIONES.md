@@ -29,6 +29,10 @@ formulario, y un **media kit en PDF** descargable.
 - **1-oct-2026 — React, solo para Mochi** (`@astrojs/react`). Los enlaces con forma de botón se pintan
   en el servidor y no cargan JavaScript; solo los campos de formulario van como islas. La integración
   va en la 4.x, la que corresponde a Astro 5 (ver [INFRA → Mochi](INFRA.md#mochi)).
+- **5-oct-2026 — Un script de movimiento en todas las páginas**, sin React: unos 2 KB comprimido,
+  que reutiliza los muelles de Mochi en vez de traer una librería de animación. Hasta entonces las
+  páginas sin formulario no cargaban JavaScript. Se aceptó porque el movimiento lo pidió Mario y
+  porque la web no depende de él: si no carga, se ve entera y quieta.
 - **Solo en español. Modo oscuro por defecto** (no hay modo claro).
 - **`src/data/contenido.js` es la fuente única** de contenido. Las páginas no llevan datos escritos a mano.
 - **Dominio `horizonsport.co`** declarado como `site` en `astro.config.mjs`. Canonical y `og:url`
@@ -60,6 +64,20 @@ formulario, y un **media kit en PDF** descargable.
 - **1-oct-2026 — Miniaturas de YouTube en la lista de episodios**, a petición de Mario. Se sirven desde
   el propio dominio (no se cargan de YouTube) y van en la lista, sin convertirla en rejilla de
   carátulas. La portada (el titular de arriba) sigue sin imagen.
+- **5-oct-2026 — Rediseño de movimiento: mismo estilo, todo en movimiento.** Mario pidió que
+  "reinen los motion graphics", con transiciones fluidas, botones que reaccionan y pensado para
+  pantallas de 120 Hz. Se le ofreció también replantear el estilo visual entero y eligió conservarlo:
+  colores, tipografía, textos y estructura no cambian. El movimiento sigue el lenguaje de los
+  grafismos de una retransmisión deportiva, y la pieza central es el titular que se ensancha por el
+  eje de anchura de Archivo, la seña de la marca. Detalle y reglas: [DISENO → Movimiento](DISENO.md#movimiento).
+  - **Descartado por Mario:** una cinta de episodios corriendo al pie de la portada, como los rótulos
+    de una retransmisión. La portada sigue siendo solo el titular.
+  - **Los botones ganan imán y luz** además del movimiento de Mochi. Matiza la entrada del 1-oct
+    ("forma y movimiento, los de Mochi"): la forma y el hundimiento siguen siendo los de la librería,
+    y el añadido va en la web, no en Mochi. Si Mario lo quiere en todos sus proyectos, el sitio
+    natural es la propia librería.
+  - **120 Hz:** la web solo anima propiedades que la tarjeta gráfica mueve sin recalcular la página,
+    pero no puede garantizar la frecuencia: Safari limita las páginas a 60 por defecto.
 
 ## Contenido y posicionamiento
 
@@ -77,6 +95,11 @@ formulario, y un **media kit en PDF** descargable.
     proyectos que vengan después del podcast.
   - **Mario**, Técnico · Audiovisual. Cámaras y grabación, digitalización del proyecto y colaboraciones
     con marcas.
+- **5-oct-2026 — Izan pasa a "Host · Negocio"**, sin "principal", a petición de Mario.
+- **5-oct-2026 — Bios de los hosts fuera de la web.** A los socios no les convence enseñarlas por
+  ahora. `/sobre-nosotros` pasa a mostrar foto, nombre y rol, como la portada. Los textos siguen en
+  `hosts` de `contenido.js`, sin pintarse, para recuperarlos si cambian de idea; no se vuelven a
+  poner sin que lo pidan.
 - **No se inventan datos de personas identificables.** Los roles y las bios estuvieron a `null` hasta
   que Mario los dio. Las fechas y duraciones provisionales se retiraron en cuanto hubo datos reales.
 - **El reparto societario es interno.** No sale en la web, ni en el repo (que es público), ni en

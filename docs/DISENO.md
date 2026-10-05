@@ -1,7 +1,8 @@
 # Diseño
 
-Sistema visual v2 (15-ago-2026). Todos los tokens y las clases globales están en
-[src/styles/global.css](../src/styles/global.css). Por qué es así: [DECISIONES → Diseño](DECISIONES.md#diseño).
+Sistema visual v2 (15-ago-2026) con capa de [movimiento](#movimiento) (5-oct-2026). Todos los tokens
+y las clases globales están en [src/styles/global.css](../src/styles/global.css). Por qué es así:
+[DECISIONES → Diseño](DECISIONES.md#diseño).
 
 ## Líneas rojas
 
@@ -35,7 +36,9 @@ Titulares: `.titular-hero`, `.titular-pagina`, `.titular-seccion` (se combinan c
 `.titular-tarjeta` (peso 600, sin `.ancha`). Texto: `.entradilla`, `.parrafo`, `.dato`.
 
 La **portada** es un solo titular sin color, "EL PARTIDO SE JUEGA EN LOS DESPACHOS", sin imagen, sin
-reproductor y sin frase resaltada en azul.
+reproductor y sin frase resaltada en azul. Ocupa la pantalla entera con el titular asentado abajo, y
+entra con el titular cinético (ver [Movimiento](#movimiento)). Su tamaño mínimo es 2.25rem para que
+"DESPACHOS" quepa a 320 px.
 
 ## Color
 
@@ -82,6 +85,11 @@ Desde el 1-oct-2026 los botones y los campos de formulario son componentes de
   `--mochi-duration-*`): se hunde al pulsar (`press`), vuelve con rebote (`snappy`) y el color cambia
   con `color`. Con "reducir movimiento" no se hunde. Si una versión nueva de Mochi lo trae de serie,
   se quita esa regla.
+- **Imán y luz (5-oct-2026), solo con ratón.** Al pasar el cursor, una luz lo sigue por dentro del
+  botón (blanca al 32 % en `accent`, papel al 10 % en `surface`) y el botón se acerca hacia él hasta
+  6 px en horizontal y 4 px en vertical; al salir vuelve con el muelle `morph` de Mochi. Lo hace
+  [src/scripts/movimiento.js](../src/scripts/movimiento.js) con la propiedad `translate`, que no pisa
+  el `transform` del hundimiento. Es un añadido de la web, no de la librería.
 - `LinkButton` (enlaces) se pinta en el servidor, sin JavaScript. `TextField` (campos de una línea)
   va como isla de React (`client:visible`; `client:load` en `/newsletter`, donde el campo está arriba):
   esas páginas cargan JavaScript cuando el formulario aparece en pantalla.
@@ -90,11 +98,60 @@ Desde el 1-oct-2026 los botones y los campos de formulario son componentes de
 - El `Button` de enviar no usa sus estados de cargando y hecho: los formularios aún no envían a
   ningún sitio, y enseñar "hecho" sería mentir. Se activan cuando haya servicio de formularios.
 
+## Movimiento
+
+Desde el 5-oct-2026 (por qué: [DECISIONES](DECISIONES.md#diseño)). La web se mueve como los grafismos
+de una retransmisión deportiva: los titulares entran como rótulos, las líneas se trazan, los números
+ruedan como un marcador y las imágenes entran con cortinilla. Todo entra rápido y se asienta con los
+muelles de Mochi (`--mochi-ease-*`), los mismos que mueven los botones.
+
+| Qué | Dónde | Cómo |
+| --- | --- | --- |
+| Titular cinético | `h1` de la portada y de cada página (`TitularCinetico.astro`) | Cada palabra sube desde detrás de su línea y pasa de estrecha (62 %) a ancha (125 %) por el eje de anchura |
+| Rótulo | Titulares de sección, entradillas, botones de la portada (`data-revela="rotulo"`) | Sube desde detrás de su borde inferior |
+| Fila | Listas de episodios, invitados, próximos y ventajas de la newsletter (`fila-trazada` + `data-revela="fila"`) | El filete se traza de izquierda a derecha y el contenido entra detrás |
+| Marcador | "Ep 04" (`Marcador.astro`) | Cada dígito rueda una vuelta entera hasta su valor |
+| Cortinilla | Miniaturas (de izquierda a derecha) y retratos (de abajo arriba) (`cortinilla` + `data-revela="cortinilla"`) | Una persiana se recoge y la imagen se asienta |
+| Dos vías | Tarjetas de invitado y patrocinio (`data-revela="desde-izquierda"` / `"desde-derecha"`) | Entran desde lados opuestos |
+| Horizonte | Filete bajo la portada (`data-revela="horizonte"`) | Un destello lo recorre y se apaga en él |
+| Texto encendido | Manifiesto de portada y misión de `/sobre-nosotros` (`TextoEncendido.astro`) | Las palabras pasan de gris a blanco según se hace scroll |
+| Cambio de página | Todo el sitio | La página nueva barre a la vieja; la cabecera se queda quieta y el subrayado azul del menú viaja al apartado nuevo |
+| Menú | Escritorio: línea al pasar el ratón. Móvil: la fila del menú se recoge al bajar y vuelve al subir | |
+| Botones | Imán y luz (ver [Mochi](#botones-y-campos-mochi)) | |
+
+Reglas:
+
+- **Solo se anima lo que no recoloca la página**: `transform`, `translate`, `scale`, `opacity` y
+  `clip-path`. Así va a la frecuencia de la pantalla, también a 120 Hz. La excepción es la anchura
+  del titular cinético, que va en cajas de ancho fijo mientras dura para no mover los saltos de línea.
+- **Para mover algo que ya tiene `transform`, usa `translate` o `scale`** (propiedades sueltas): se
+  suman en vez de pisarse. El imán de los botones y las entradas de lado lo hacen así.
+- **Sin JavaScript la página se ve entera.** Los estados de espera solo existen con la clase
+  `.con-movimiento`, que pone `Base.astro` antes de pintar; si el script no ha arrancado a los 3 s, se
+  quita. El script ([src/scripts/movimiento.js](../src/scripts/movimiento.js)) solo decide cuándo
+  revelar: lo visual está en `global.css`, apartado "Movimiento".
+- **Lo que ya se ve al cargar entra detrás del titular**, escalonado; lo demás, al entrar en pantalla,
+  escalonado 80 ms entre elementos (como mucho 6 pasos).
+- **Con "reducir movimiento"** no hay entradas ni imán: todo está en su sitio desde el principio. El
+  texto encendido se mantiene (es un cambio de color, no de posición) y el cambio de página es un
+  fundido.
+- **Nada nuevo en azul.** Las líneas, el destello y la luz de los botones de contorno van en blanco
+  o gris; el azul sigue reservado a lo de la [tabla de color](#color).
+- Para animar un elemento nuevo, usa una variante de `data-revela` de la tabla en vez de inventar
+  otra entrada: que no haya una animación distinta en cada sección es parte del lenguaje.
+
+Navegadores: el cambio de página animado y el texto encendido funcionan en Chrome, Edge y Safari 26
+o posterior. En Firefox se navega como siempre y el texto se ve encendido desde el principio.
+Safari limita por defecto las páginas a 60 imágenes por segundo, en iPhone y en Mac, aunque la
+pantalla dé 120; es un ajuste de Apple que la web no puede cambiar.
+
 ## Accesibilidad
 
 - **Contraste AA verificado**: 0 fallos, peor caso 5.12:1. `--papel-tenue` era `#5b6773` y daba
   3.1–3.5:1, así que se aclaró. **Si se oscurece algún gris, hay que volver a medir.**
-- Enlace "Saltar al contenido", foco visible en azul y `prefers-reduced-motion` respetado.
+- Enlace "Saltar al contenido", foco visible en azul y `prefers-reduced-motion` respetado: con
+  "reducir movimiento" todo aparece ya en su sitio y el cambio de página es un fundido (detalle en
+  [Movimiento](#movimiento)).
 - El menú funciona sin JavaScript: por debajo de 900 px pasa a una fila con desplazamiento horizontal.
 - Los números de episodio son `aria-hidden`. El título lleva el número en texto oculto para lectores
   de pantalla.
@@ -105,6 +162,9 @@ Desde el 1-oct-2026 los botones y los campos de formulario son componentes de
 - Cortes: **1024 px** (en las filas de episodio, el botón baja bajo el texto y la miniatura se
   reduce), **900 px** (menú), **860 px** (rejilla de 3 → 2, pie de 4 → 2), **700 px** (filas de
   episodio e invitado a una columna), **620 px** (rejillas a 1 columna), **520 px** (pie a 1 columna).
+- La portada mide la pantalla menos la cabecera (`--alto-cabecera`: 4.25rem; 7rem por debajo de
+  900 px, con la fila del menú). Si el contenido no cabe, crece: en un portátil de 900 px de alto los
+  botones quedan justo en el borde inferior.
 
 ## Fotos de los hosts
 
@@ -134,6 +194,16 @@ Desde el 1-oct-2026 los botones y los campos de formulario son componentes de
 - **Los estilos con ámbito de Astro no llegan a los componentes de Mochi**, porque son de React.
   Para colocar o dimensionar uno desde un `.astro` hace falta `:global(.clase)`, pasándole la clase
   con `className`.
+- **A los componentes de Astro sí les llega**, si el componente recoge `class` y reparte el resto de
+  propiedades en su raíz (`const { class: clase, ...resto } = Astro.props`). Así lo hacen
+  `TitularCinetico` y `TextoEncendido`, y por eso `.manifiesto` o `.perdida__titulo` siguen aplicando.
+- **El servidor de desarrollo puede quedarse con estilos viejos de un componente** tras reescribirlo
+  entero: la página se pinta con el HTML nuevo y el CSS antiguo. Pasó el 5-oct-2026 con la cabecera,
+  que perdió su nombre de transición. Si un estilo recién escrito no aparece, reinicia `npm run dev`
+  antes de buscar el fallo en el código.
+- **Las animaciones solo avanzan con la pestaña visible.** Para comprobarlas desde una herramienta
+  automática, el navegador tiene que estar en primer plano o ser uno sin pantalla (Playwright); con
+  el panel oculto se quedan congeladas en el primer fotograma.
 
 ## Referencia
 

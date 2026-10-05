@@ -1,0 +1,45 @@
+---
+// Frase cuyas palabras se encienden, de gris a blanco, según se hace scroll hasta ella; la última
+// en encenderse es la que cierra la frase. Va atada al scroll con CSS (animation-timeline), sin
+// JavaScript. Donde el navegador no lo soporta, la frase se ve encendida desde el principio.
+// El gris de partida es --papel-tenue, que ya pasa el contraste AA: se lee aunque no se encienda.
+const { texto, class: clase, ...resto } = Astro.props;
+const palabras = texto.split(' ');
+---
+
+<p class:list={['encendido', clase]} style={`--total:${palabras.length}`} {...resto}>
+  {
+    palabras.map((palabra, i) => (
+      <>
+        <span class="encendido__palabra" style={`--i:${i}`}>{palabra}</span>
+        {i < palabras.length - 1 && ' '}
+      </>
+    ))
+  }
+</p>
+
+<style>
+  /* El encendido ocupa del primer tramo de la frase en pantalla (asoma por abajo) a cuando llega
+     a la mitad: así está entera en blanco cuando se lee. */
+  @supports (animation-timeline: view()) {
+    .encendido {
+      view-timeline: --encendido block;
+    }
+
+    .encendido__palabra {
+      animation: encender linear both;
+      animation-timeline: --encendido;
+      animation-range: cover calc(8% + var(--i) / var(--total) * 26%)
+        cover calc(16% + var(--i) / var(--total) * 26%);
+    }
+  }
+
+  @keyframes encender {
+    from {
+      color: var(--papel-tenue);
+    }
+    to {
+      color: var(--papel);
+    }
+  }
+</style>

@@ -5,6 +5,9 @@ import FilaEpisodio from '../components/FilaEpisodio.astro';
 import BloqueColabora from '../components/BloqueColabora.astro';
 import BloqueNewsletter from '../components/BloqueNewsletter.astro';
 import Retrato from '../components/Retrato.astro';
+import TitularCinetico from '../components/TitularCinetico.astro';
+import TextoEncendido from '../components/TextoEncendido.astro';
+import Marcador from '../components/Marcador.astro';
 import { episodios, hosts, invitados, plataformas } from '../data/contenido.js';
 
 const publicados = invitados.filter((i) => i.publicado);
@@ -14,19 +17,19 @@ const disponibles = plataformas.filter((p) => p.url);
 <Base activo="/">
   <section class="hero">
     <div class="envoltorio">
-      <h1 class="titular-hero ancha">El partido se juega en los despachos</h1>
+      <TitularCinetico class="titular-hero ancha" texto="El partido se juega en los despachos" />
 
-      <p class="entradilla hero__entradilla">
+      <p class="entradilla hero__entradilla" data-revela="rotulo">
         El podcast del negocio del deporte. Conversaciones con deportistas, entrenadores, marcas y
         gestores sobre lo que no se ve desde la grada.
       </p>
 
-      <div class="fila hero__acciones">
+      <div class="fila hero__acciones" data-revela="rotulo">
         <LinkButton href="/episodios" variant="accent">Escuchar los episodios</LinkButton>
         <LinkButton href="/colabora" variant="surface">Quiero participar</LinkButton>
       </div>
 
-      <p class="dato hero__plataformas">
+      <p class="dato hero__plataformas" data-revela="rotulo">
         {disponibles.map((p, i) => (
           <>
             <a class="enlace" href={p.url}>{p.nombre}</a>{i < disponibles.length - 1 ? '   ·   ' : ''}
@@ -34,14 +37,16 @@ const disponibles = plataformas.filter((p) => p.url);
         ))}
       </p>
     </div>
+
+    <div class="hero__horizonte" data-revela="horizonte" aria-hidden="true"></div>
   </section>
 
   <section class="seccion seccion--alterna">
     <div class="envoltorio">
-      <p class="manifiesto">
-        Todo el mundo habla de lo que pasa en el campo. Nosotros hablamos de lo que pasa en los
-        despachos.
-      </p>
+      <TextoEncendido
+        class="manifiesto"
+        texto="Todo el mundo habla de lo que pasa en el campo. Nosotros hablamos de lo que pasa en los despachos."
+      />
       <div class="manifiesto__texto">
         <p class="parrafo">
           Detrás de cada patrocinio hay un cálculo de retorno, detrás de cada carrera deportiva una
@@ -59,7 +64,7 @@ const disponibles = plataformas.filter((p) => p.url);
   <section class="seccion">
     <div class="envoltorio">
       <div class="encabezado">
-        <h2 class="titular-seccion ancha">Episodios</h2>
+        <h2 class="titular-seccion ancha" data-revela="rotulo">Episodios</h2>
         <LinkButton href="/episodios" variant="surface">Ver todos</LinkButton>
       </div>
 
@@ -74,15 +79,15 @@ const disponibles = plataformas.filter((p) => p.url);
   <section class="seccion">
     <div class="envoltorio">
       <div class="encabezado">
-        <h2 class="titular-seccion ancha">Invitados</h2>
+        <h2 class="titular-seccion ancha" data-revela="rotulo">Invitados</h2>
         <LinkButton href="/invitados" variant="surface">Ver todos</LinkButton>
       </div>
 
       <ul class="invitados">
         {
           publicados.map((inv) => (
-            <li class="invitados__fila">
-              <span class="estrecha">Ep {inv.episodio}</span>
+            <li class="invitados__fila fila-trazada" data-revela="fila">
+              <span class="estrecha">Ep <Marcador valor={inv.episodio} /></span>
               <p class="titular-tarjeta">{inv.nombre}</p>
               <p class="dato">{inv.rol}</p>
             </li>
@@ -95,7 +100,7 @@ const disponibles = plataformas.filter((p) => p.url);
   <section class="seccion seccion--alterna">
     <div class="envoltorio">
       <div class="encabezado">
-        <h2 class="titular-seccion ancha">Quiénes somos</h2>
+        <h2 class="titular-seccion ancha" data-revela="rotulo">Quiénes somos</h2>
         <LinkButton href="/sobre-nosotros" variant="surface">Conócenos</LinkButton>
       </div>
 
@@ -117,8 +122,30 @@ const disponibles = plataformas.filter((p) => p.url);
 </Base>
 
 <style>
+  /* La portada llena la pantalla y el titular se asienta abajo, sobre la línea del horizonte: el
+     filete superior de la sección siguiente. */
   .hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: calc(100svh - var(--alto-cabecera));
     padding-block: clamp(3.5rem, 11vw, 8.5rem) clamp(3rem, 8vw, 6rem);
+  }
+
+  /* Destello que recorre ese filete al cargar. Por defecto está apagado: solo existe mientras dura
+     su animación (global.css, "horizonte"). */
+  .hero__horizonte {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--papel);
+    transform-origin: 0 50%;
+    opacity: 0;
+    pointer-events: none;
   }
 
   .hero__entradilla {
@@ -164,7 +191,6 @@ const disponibles = plataformas.filter((p) => p.url);
     grid-template-columns: 5rem 1fr;
     gap: 0.15rem 1.5rem;
     padding-block: 1.25rem;
-    border-top: 1px solid var(--linea);
   }
 
   .invitados__fila .estrecha {

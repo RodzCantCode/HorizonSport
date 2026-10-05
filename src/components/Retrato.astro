@@ -1,39 +1,39 @@
 ---
 // `foto` es el slug del archivo en public/fotos (p. ej. 'mario' -> mario-900.webp).
 // Si es null se muestra un hueco a rayas en vez de una imagen rota.
+// El marco (.cortinilla, en global.css) lleva el borde y entra con una cortinilla de abajo arriba.
 const { foto = null, nombre = '', rol = '', ratio = '4 / 5' } = Astro.props;
 ---
 
-{
-  foto ? (
-    <img
-      class="retrato"
-      src={`/fotos/${foto}-900.webp`}
-      srcset={`/fotos/${foto}-450.webp 450w, /fotos/${foto}-900.webp 900w`}
-      sizes="(max-width: 620px) 100vw, (max-width: 860px) 50vw, 33vw"
-      width="900"
-      height="1125"
-      alt={`Retrato de ${nombre}`}
-      loading="lazy"
-      decoding="async"
-      style={`aspect-ratio:${ratio}`}
-    />
-  ) : (
-    <div class="retrato retrato--reserva" style={`aspect-ratio:${ratio}`} aria-hidden="true">
-      <span class="retrato__marca">Foto</span>
-      {rol && <span class="retrato__rol">{rol}</span>}
-    </div>
-  )
-}
+<div class="cortinilla cortinilla--vertical" data-revela="cortinilla">
+  {
+    foto ? (
+      <img
+        class="retrato"
+        src={`/fotos/${foto}-900.webp`}
+        srcset={`/fotos/${foto}-450.webp 450w, /fotos/${foto}-900.webp 900w`}
+        sizes="(max-width: 620px) 100vw, (max-width: 860px) 50vw, 33vw"
+        width="900"
+        height="1125"
+        alt={`Retrato de ${nombre}`}
+        loading="lazy"
+        decoding="async"
+        style={`aspect-ratio:${ratio}`}
+      />
+    ) : (
+      <div class="retrato retrato--reserva" style={`aspect-ratio:${ratio}`} aria-hidden="true">
+        <span class="retrato__marca">Foto</span>
+        {rol && <span class="retrato__rol">{rol}</span>}
+      </div>
+    )
+  }
+</div>
 
 <style>
   .retrato {
     width: 100%;
     height: auto;
     object-fit: cover;
-    border: 1px solid var(--linea);
-    border-radius: 3px;
-    background: var(--tinta-600);
   }
 
   .retrato--reserva {

@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import EncabezadoPagina from '../components/EncabezadoPagina.astro';
 import FilaEpisodio from '../components/FilaEpisodio.astro';
 import BloqueNewsletter from '../components/BloqueNewsletter.astro';
+import Marcador from '../components/Marcador.astro';
 import { episodios, episodiosProximos } from '../data/contenido.js';
 ---
 
@@ -26,13 +27,13 @@ import { episodios, episodiosProximos } from '../data/contenido.js';
 
   <section class="seccion seccion--alterna">
     <div class="envoltorio">
-      <h2 class="titular-seccion ancha">Grabados, pendientes de edición</h2>
+      <h2 class="titular-seccion ancha" data-revela="rotulo">Grabados, pendientes de edición</h2>
 
       <ul class="proximos">
         {
           episodiosProximos.map((ep) => (
-            <li class="proximos__fila">
-              <span class="estrecha">Ep {ep.numero}</span>
+            <li class="proximos__fila fila-trazada" data-revela="fila">
+              <span class="estrecha">Ep <Marcador valor={ep.numero} /></span>
               <p class="proximos__pista">{ep.pista}</p>
             </li>
           ))
@@ -60,7 +61,6 @@ import { episodios, episodiosProximos } from '../data/contenido.js';
     gap: 1.5rem;
     align-items: baseline;
     padding-block: 1.1rem;
-    border-top: 1px solid var(--linea);
   }
 
   .proximos__pista {

@@ -32,19 +32,19 @@ import EncabezadoPagina from '../components/EncabezadoPagina.astro';
       <p class="dato alta__nota">Cada jueves · cancelas cuando quieras</p>
 
       <ul class="alta__ventajas">
-        <li class="alta__fila">
+        <li class="alta__fila fila-trazada" data-revela="fila">
           <p class="titular-tarjeta">El episodio, resumido</p>
           <p class="parrafo alta__texto">
             Las tres ideas que te llevarías si lo escucharas entero.
           </p>
         </li>
-        <li class="alta__fila">
+        <li class="alta__fila fila-trazada" data-revela="fila">
           <p class="titular-tarjeta">Lo que se mueve</p>
           <p class="parrafo alta__texto">
             Operaciones y acuerdos del sector, con el contexto que la nota de prensa no trae.
           </p>
         </li>
-        <li class="alta__fila">
+        <li class="alta__fila fila-trazada" data-revela="fila">
           <p class="titular-tarjeta">Antes que nadie</p>
           <p class="parrafo alta__texto">
             Quién viene la semana siguiente, y puedes mandarnos preguntas para el invitado.
@@ -81,7 +81,6 @@ import EncabezadoPagina from '../components/EncabezadoPagina.astro';
 
   .alta__fila {
     padding-block: 1.35rem;
-    border-top: 1px solid var(--linea);
   }
 
   .alta__texto {

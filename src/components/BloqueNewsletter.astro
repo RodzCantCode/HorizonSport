@@ -5,7 +5,7 @@ const { fondo = 'base' } = Astro.props;
 
 <section class:list={['boletin', { 'boletin--alterno': fondo === 'alterno' }]} aria-labelledby="boletin-titulo">
   <div class="envoltorio boletin__interior">
-    <h2 class="titular-seccion ancha boletin__titulo" id="boletin-titulo">
+    <h2 class="titular-seccion ancha boletin__titulo" id="boletin-titulo" data-revela="rotulo">
       El análisis, cada semana en tu correo
     </h2>
 

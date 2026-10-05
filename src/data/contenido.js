@@ -74,10 +74,12 @@ export const episodiosProximos = [
 ];
 
 // El reparto societario del proyecto es información interna y no se publica.
+// `bio` no se pinta en ninguna página desde el 5-oct-2026: los socios prefieren no enseñarla por
+// ahora. Se guarda para poder recuperarla (ver DECISIONES, "Bios de los hosts").
 export const hosts = [
   {
     nombre: 'Izan',
-    rol: 'Host principal · Negocio',
+    rol: 'Host · Negocio',
     bio: 'Lidera el proyecto y lleva la voz principal del podcast. Aunque también se mete en la parte audiovisual, su terreno es la operativa de negocio: activación de patrocinios y acuerdos de colaboración.',
     foto: 'izan',
   },

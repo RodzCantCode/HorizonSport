@@ -1,0 +1,65 @@
+---
+// Titular que entra palabra a palabra: cada una sube desde detrás de su línea y, a la vez, pasa de
+// estrecha a ancha por el eje de anchura de Archivo, que es la seña de la marca.
+// Cambiar la anchura de una letra cambia lo que ocupa, y eso movería los saltos de línea mientras
+// dura el movimiento. Por eso cada palabra va en su propia caja: el script mide el ancho final de
+// cada caja, lo fija mientras la palabra se ensancha por dentro y lo suelta al terminar.
+// Sin JavaScript o con "reducir movimiento" es un titular normal.
+const { texto, nivel = 'h1', class: clase, ...resto } = Astro.props;
+const Etiqueta = nivel;
+const palabras = texto.split(' ');
+---
+
+<Etiqueta class={clase} data-cinetico {...resto}>
+  {
+    palabras.map((palabra, i) => (
+      <>
+        <span class="palabra" style={`--i:${i}`}>
+          <span class="palabra__tinta">{palabra}</span>
+        </span>
+        {i < palabras.length - 1 && ' '}
+      </>
+    ))
+  }
+</Etiqueta>
+
+<style>
+  /* El relleno con margen negativo da aire a tildes, comas y letras que asoman sin cambiar lo que
+     ocupa la palabra en la línea. La palabra espera bajada un 130 % de su altura: lo justo para que
+     ni el borde de las mayúsculas asome por ese relleno antes de subir. */
+  .palabra {
+    display: inline-block;
+    vertical-align: top;
+    overflow: clip;
+    padding: 0.14em 0.06em 0.1em;
+    margin: -0.14em -0.06em -0.1em;
+  }
+
+  .palabra__tinta {
+    display: inline-block;
+  }
+
+  @media screen and (prefers-reduced-motion: no-preference) {
+    :global(.con-movimiento) [data-cinetico]:not(.en-marcha, .cinetico-hecho) .palabra__tinta {
+      transform: translateY(130%);
+    }
+
+    :global(.con-movimiento) [data-cinetico].en-marcha .palabra__tinta {
+      animation:
+        cinetico-sube 720ms var(--mochi-ease-trail) calc(var(--i) * 70ms) backwards,
+        cinetico-ensancha 1000ms var(--curva-llegada) calc(var(--i) * 70ms + 60ms) backwards;
+    }
+  }
+
+  @keyframes cinetico-sube {
+    from {
+      transform: translateY(130%);
+    }
+  }
+
+  @keyframes cinetico-ensancha {
+    from {
+      font-stretch: 62%;
+    }
+  }
+</style>
